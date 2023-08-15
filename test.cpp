@@ -10,20 +10,20 @@ else if(((b==0) && (c==0)) || ((a==0) && (c==0))){
     printf("%s","решение = 0");
 }
 else if (a==0){
-    printf("решение = %f", b/c);
+    printf("решение = %g", b/c);
 }
 else{
 
     double Discriminant = b*b-4*a*c;
     if (Discriminant==0){
-        printf("решение = %f", -b/(2*a));
+        printf("решение = %g", -b/(2*a));
     }
     else if (Discriminant > 0){
         double x1 = (-b+sqrt(Discriminant))/(2*a);
         double x2 = (-b-sqrt(Discriminant))/(2*a);
         printf("2 решения\n");
-        printf("x1 = %f\n", x1);
-        printf("x2 = %f\n", x2);
+        printf("x1 = %g\n", x1);
+        printf("x2 = %g\n", x2);
     }
     else{
         printf("нет решений");
