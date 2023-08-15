@@ -1,7 +1,7 @@
 #include <TXLib.h>
 #include <stdio.h>
 #include <math.h>
-void solver (float a, float b, float c){
+void solver (double a, double b, double c){
 if ((a==0) && (b==0) && (c==0)){
     printf("%s", "бесконечно много решений");
 
@@ -34,9 +34,9 @@ else{
 
 }
 int main (){
-float a,b,c;
+double a,b,c;
 printf("%s","введите коэффициенты a, b, c\n");
-scanf("%f%f%f", &a,&b,&c);
+scanf("%lf%lf%lf", &a,&b,&c);
 solver(a,b,c);
 return 0;
 }
