@@ -102,7 +102,7 @@ void solver (double a, double b, double c){
 
     int Root_counter = Square_root_counter (a, b, c);
 
-    switch(Root_counter){
+    switch (Root_counter){
 
         case 0:{
 
@@ -114,6 +114,7 @@ void solver (double a, double b, double c){
         case 1:{
 
             zero_A_one_sollution (b, c);
+            break;
 
         }
 
