@@ -102,6 +102,8 @@ void solver (double a, double b, double c){
 
     int Root_counter = Square_root_counter (a, b, c);
 
+    printf("\n");
+
     switch(Root_counter){
 
         case 0:{
