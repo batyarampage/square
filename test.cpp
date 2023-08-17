@@ -4,19 +4,69 @@
 
 #define epsilon 1e-10
 
+
 void solver (double a, double b, double c);
 
 int Square_root_counter (double a, double b, double c);
 
 double Discriminant_calculation (double a, double b, double c);
 
-double zero_Discriminant (double a, double b);
+void zero_Discriminant (double a, double b);
 
 void infinity_sollutions ();
 
-double zero_A_one_sollution (double b, double c);
+void zero_A_one_sollution (double b, double c);
+
+void no_sollution ();
+
+void two_roots_calculate (double a, double b, double Discriminant);
+
+void sollution_is_zero ();
 
 
+
+
+void zero_Discriminant (double a, double b){
+
+    printf("Дискриминант = 0, решение единственно, оно равно %g\n", -b/(2*a));
+
+}
+
+void infinity_sollutions (){
+
+    printf("Уравнение имеет бесконечное количество решений");
+
+}
+
+void zero_A_one_sollution (double b, double c){
+
+    printf("уравнение с a = 0, решение единственно, оно равно %g\n", -b/c);
+
+}
+
+void no_sollution (){
+
+    printf("уравнение не имеет решений на множестве действительных чисел");
+
+}
+
+void two_roots_calculate (double a, double b, double Discriminant){
+
+    double sqrt_Discriminant = sqrt(Discriminant);
+
+    double x1 = (-b+sqrt_Discriminant)/(2*a);
+    double x2 = (-b-sqrt_Discriminant)/(2*a);
+
+    printf("уравнение имеет 2 решения\n");
+    printf("x1 = %g\n", x1);
+    printf("x2 = %g\n", x2);
+
+}
+
+void sollution_is_zero (){
+
+    printf("решение единственно, оно равно 0");
+}
 
 double Discriminant_calculation (double a, double b, double c){
 
@@ -47,6 +97,7 @@ int Square_root_counter (double a, double b, double c){
 }
 
 
+
 void solver (double a, double b, double c){
 
     int Root_counter = Square_root_counter (a, b, c);
@@ -55,7 +106,8 @@ void solver (double a, double b, double c){
 
         case 0:{
 
-            infinity_sollutions ();
+            sollution_is_zero ();
+            break;
 
         }
 
@@ -72,14 +124,43 @@ void solver (double a, double b, double c){
             if (fabs(Discriminant) < epsilon){
 
                 zero_Discriminant (a, b);
+                break;
 
             }
 
+            else if (Discriminant < 0){
 
+                no_sollution ();
+                break;
+
+            }
+
+            else{
+
+                two_roots_calculate (a, b, Discriminant);
+                break;
+
+            }
+        }
+
+        case 3:{
+
+            infinity_sollutions ();
+            break;
 
         }
 
+        default:{
+
+            break;
+
+        }
+
+
+
     }
+
+
 
 }
 
