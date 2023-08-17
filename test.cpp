@@ -1,6 +1,34 @@
 #include <TXLib.h>
 #include <stdio.h>
 #include <math.h>
+
+void solver (double a, double b, double c);
+
+int Square_root_counter (double a, double b, double c);
+
+
+int Square_root_counter (double a, double b, double c){
+
+    if ((a==0) && (b==0) && (c==0)){
+        return 3;
+    }
+
+    else if (((b==0) && (c==0)) || ((a==0) && (c==0))){
+        return 0;
+    }
+
+    else if (a==0){
+        return 1;
+    }
+
+    else{
+        return 2;
+    }
+
+
+}
+
+
 void solver (double a, double b, double c){
 if ((a==0) && (b==0) && (c==0)){
     printf("%s", "бесконечно много решений");
