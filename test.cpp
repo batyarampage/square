@@ -166,9 +166,16 @@ void solver (double a, double b, double c){
 
 
 int main (){
-double a,b,c;
-printf("%s","введите коэффициенты a, b, c\n");
-scanf("%lf%lf%lf", &a,&b,&c);
-solver(a,b,c);
-return 0;
+
+    double a = 0;
+    double b = 0;
+    double c = 0;
+
+    printf("введите коэффициенты a, b, c\n");
+
+    scanf("%lf%lf%lf", &a,&b,&c);
+
+    solver(a,b,c);
+
+    return 0;
 }
