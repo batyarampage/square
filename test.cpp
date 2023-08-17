@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define epsilon 1e-10
+#define epsilon 1e-100
 
 
 void solver (double a, double b, double c);
