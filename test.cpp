@@ -1,8 +1,9 @@
-#include <TXLib.h>
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <TXLib.h>
 
-#define epsilon 1e-100
+
+const double EPSILON = 1e-100;
 
 
 void solver (double a, double b, double c);
@@ -23,6 +24,22 @@ void two_roots_calculate (double a, double b, double Discriminant);
 
 void sollution_is_zero ();
 
+
+int main (){
+
+    double a = 0;
+    double b = 0;
+    double c = 0;
+
+    printf ("введите коэффициенты a, b, c\n");
+
+    scanf ("%lf%lf%lf", &a,&b,&c);
+    printf ("\n");
+
+    solver (a,b,c);
+
+    return 0;
+}
 
 
 
@@ -77,15 +94,15 @@ double Discriminant_calculation (double a, double b, double c){
 
 int Square_root_counter (double a, double b, double c){
 
-    if ((fabs(a) < epsilon) && (fabs(b) < epsilon) && (fabs(c) < epsilon)){
+    if ((fabs(a) < EPSILON) && (fabs(b) < EPSILON) && (fabs(c) < EPSILON)){
         return 3;
     }
 
-    else if (((fabs(b) < epsilon) && (fabs(c) < epsilon)) || ((fabs(a) < epsilon) && (fabs(c) < epsilon))){
+    else if (((fabs(b) < EPSILON) && (fabs(c) < EPSILON)) || ((fabs(a) < EPSILON) && (fabs(c) < EPSILON))){
         return 0;
     }
 
-    else if (fabs(a) < epsilon){
+    else if (fabs(a) < EPSILON){
         return 1;
     }
 
@@ -122,7 +139,7 @@ void solver (double a, double b, double c){
 
             double Discriminant = Discriminant_calculation (a, b, c);
 
-            if (fabs(Discriminant) < epsilon){
+            if (fabs(Discriminant) < EPSILON){
 
                 zero_Discriminant (a, b);
                 break;
@@ -166,18 +183,4 @@ void solver (double a, double b, double c){
 }
 
 
-int main (){
 
-    double a = 0;
-    double b = 0;
-    double c = 0;
-
-    printf("введите коэффициенты a, b, c\n");
-
-    scanf("%lf%lf%lf", &a,&b,&c);
-    printf("\n");
-
-    solver(a,b,c);
-
-    return 0;
-}
