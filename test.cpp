@@ -102,8 +102,6 @@ void solver (double a, double b, double c){
 
     int Root_counter = Square_root_counter (a, b, c);
 
-    printf("\n");
-
     switch(Root_counter){
 
         case 0:{
@@ -176,6 +174,7 @@ int main (){
     printf("введите коэффициенты a, b, c\n");
 
     scanf("%lf%lf%lf", &a,&b,&c);
+    printf("\n");
 
     solver(a,b,c);
 
