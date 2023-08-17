@@ -2,22 +2,40 @@
 #include <stdio.h>
 #include <math.h>
 
+#define epsilon 1e-10
+
 void solver (double a, double b, double c);
 
 int Square_root_counter (double a, double b, double c);
 
+double Discriminant_calculation (double a, double b, double c);
+
+double zero_Discriminant (double a, double b);
+
+void infinity_sollutions ();
+
+double zero_A_one_sollution (double b, double c);
+
+
+
+double Discriminant_calculation (double a, double b, double c){
+
+    return b*b-4*a*c;
+
+}
+
 
 int Square_root_counter (double a, double b, double c){
 
-    if ((a==0) && (b==0) && (c==0)){
+    if ((fabs(a) < epsilon) && (fabs(b) < epsilon) && (fabs(c) < epsilon)){
         return 3;
     }
 
-    else if (((b==0) && (c==0)) || ((a==0) && (c==0))){
+    else if (((fabs(b) < epsilon) && (fabs(c) < epsilon)) || ((fabs(a) < epsilon) && (fabs(c) < epsilon))){
         return 0;
     }
 
-    else if (a==0){
+    else if (fabs(a) < epsilon){
         return 1;
     }
 
@@ -30,37 +48,42 @@ int Square_root_counter (double a, double b, double c){
 
 
 void solver (double a, double b, double c){
-if ((a==0) && (b==0) && (c==0)){
-    printf("%s", "бесконечно много решений");
 
-}
-else if(((b==0) && (c==0)) || ((a==0) && (c==0))){
-    printf("%s","решение = 0");
-}
-else if (a==0){
-    printf("решение = %g", b/c);
-}
-else{
+    int Root_counter = Square_root_counter (a, b, c);
 
-    double Discriminant = b*b-4*a*c;
-    if (Discriminant==0){
-        printf("решение = %g", -b/(2*a));
+    switch(Root_counter){
+
+        case 0:{
+
+            infinity_sollutions ();
+
+        }
+
+        case 1:{
+
+            zero_A_one_sollution (b, c);
+
+        }
+
+        case 2:{
+
+            double Discriminant = Discriminant_calculation (a, b, c);
+
+            if (fabs(Discriminant) < epsilon){
+
+                zero_Discriminant (a, b);
+
+            }
+
+
+
+        }
+
     }
-    else if (Discriminant > 0){
-        double x1 = (-b+sqrt(Discriminant))/(2*a);
-        double x2 = (-b-sqrt(Discriminant))/(2*a);
-        printf("2 решения\n");
-        printf("x1 = %g\n", x1);
-        printf("x2 = %g\n", x2);
-    }
-    else{
-        printf("нет решений");
-    }
-
 
 }
 
-}
+
 int main (){
 double a,b,c;
 printf("%s","введите коэффициенты a, b, c\n");
