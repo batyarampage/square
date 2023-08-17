@@ -41,6 +41,14 @@ int main (){
     return 0;
 }
 
+enum Square_equations_roots{
+
+   any_number_is_solution = -1,
+   zero_is_solution,
+   one_root,
+   two_roots,
+
+};
 
 
 void zero_Discriminant (double a, double b){
@@ -95,19 +103,19 @@ double Discriminant_calculation (double a, double b, double c){
 int Square_root_counter (double a, double b, double c){
 
     if ((fabs(a) < EPSILON) && (fabs(b) < EPSILON) && (fabs(c) < EPSILON)){
-        return 3;
+        return any_number_is_solution;
     }
 
     else if (((fabs(b) < EPSILON) && (fabs(c) < EPSILON)) || ((fabs(a) < EPSILON) && (fabs(c) < EPSILON))){
-        return 0;
+        return zero_is_solution;
     }
 
     else if (fabs(a) < EPSILON){
-        return 1;
+        return one_root;
     }
 
     else{
-        return 2;
+        return two_roots;
     }
 
 
@@ -121,21 +129,21 @@ void solver (double a, double b, double c){
 
     switch (Root_counter){
 
-        case 0:{
+        case zero_is_solution:{
 
             sollution_is_zero ();
             break;
 
         }
 
-        case 1:{
+        case one_root:{
 
             zero_A_one_sollution (b, c);
             break;
 
         }
 
-        case 2:{
+        case two_roots:{
 
             double Discriminant = Discriminant_calculation (a, b, c);
 
@@ -161,7 +169,7 @@ void solver (double a, double b, double c){
             }
         }
 
-        case 3:{
+        case any_number_is_solution:{
 
             infinity_sollutions ();
             break;
