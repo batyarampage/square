@@ -6,9 +6,21 @@
 const double EPSILON = 1e-100;
 
 
+
+enum Square_equations_roots{
+
+   ANY_NUMBER_IS_SOLUTION = -1,
+   NO_ROOTS,
+   ONE_ROOT,
+   TWO_ROOTS,
+   LINEAR_EQUATION
+
+
+};
+
 void solver (double a, double b, double c);
 
-int Square_root_counter (double a, double b, double c);
+Square_equations_roots Square_root_counter (double a, double b, double c, double *discriminant);
 
 double Discriminant_calculation (double a, double b, double c);
 
@@ -41,14 +53,7 @@ int main (){
     return 0;
 }
 
-enum Square_equations_roots{
 
-   any_number_is_solution = -1,
-   zero_is_solution,
-   one_root,
-   two_roots,
-
-};
 
 
 void zero_Discriminant (double a, double b){
@@ -100,50 +105,68 @@ double Discriminant_calculation (double a, double b, double c){
 }
 
 
-int Square_root_counter (double a, double b, double c){
+Square_equations_roots Square_root_counter (double a, double b, double c, double *discriminant){
 
-    if ((fabs(a) < EPSILON) && (fabs(b) < EPSILON) && (fabs(c) < EPSILON)){
-        return any_number_is_solution;
-    }
+    if (fabs(a) < EPSILON){   // linear equation
 
-    else if (((fabs(b) < EPSILON) && (fabs(c) < EPSILON)) || ((fabs(a) < EPSILON) && (fabs(c) < EPSILON))){
-        return zero_is_solution;
-    }
+        if ((fabs(b) < EPSILON) && (fabs(c) < EPSILON)){
 
-    else if (fabs(a) < EPSILON){
-        return one_root;
+            return ANY_NUMBER_IS_SOLUTION;
+        }
+
+        return LINEAR_EQUATION;
+
     }
 
     else{
-        return two_roots;
+
+        *discriminant = Discriminant_calculation (a, b, c);
+
+        if (fabs(*discriminant) < 0){
+
+            return ONE_ROOT;
+
+        }
+
+        else if (*discriminant > 0){
+
+            return TWO_ROOTS;
+
+        }
+
+        return NO_ROOTS;
+
     }
-
-
 }
 
 
 
 void solver (double a, double b, double c){
 
-    int Root_counter = Square_root_counter (a, b, c);
+    double discriminant = 0.0;
+    Square_equations_roots Root_counter = Square_root_counter (a, b, c, &discriminant);
 
     switch (Root_counter){
 
-        case zero_is_solution:{
+        case ANY_NUMBER_IS_SOLUTION:{
 
             sollution_is_zero ();
             break;
 
         }
 
-        case one_root:{
+        case NO_ROOTS:{
+            break;
+        }
+
+        case ONE_ROOT:{
 
             zero_A_one_sollution (b, c);
             break;
 
         }
 
-        case two_roots:{
+        case TWO_ROOTS:{
 
             double Discriminant = Discriminant_calculation (a, b, c);
 
@@ -169,7 +192,7 @@ void solver (double a, double b, double c){
             }
         }
 
-        case any_number_is_solution:{
+        case LINEAR_EQUATION:{
 
             infinity_sollutions ();
             break;
