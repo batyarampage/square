@@ -42,7 +42,7 @@ void b_coef (double *b);
 
 void c_coef (double *c);
 
-void hello (int *ch, double *a, double *b, double *c);
+void cin_coef (int *ch, double *a, double *b, double *c);
 
 void charchecker (int *ch);
 
@@ -54,7 +54,7 @@ int main (){
     double c = 0;
     int ch = 0;
 
-    hello (&ch, &a, &b, &c);
+    cin_coef (&ch, &a, &b, &c);
 
     solver (a,b,c);
 
@@ -161,7 +161,7 @@ bool compare_double (double param){
 }
 
 
-void hello (int *ch, double *a, double *b, double *c){
+void cin_coef (int *ch, double *a, double *b, double *c){
 
     printf("Привет, эта программа решает квадратное уравнение, После каждого коэффициента вводите пробел\n");
     printf("Когда будете готовы вводить коэффициеты, нажмите Enter");
