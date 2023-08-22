@@ -3,24 +3,27 @@
 #include <TXLib.h>
 
 
-const double EPSILON = 1e-100;
+const double EPSILON = 1e-100;  // static переменная в compare_double
 
 
-
-enum Square_equations_roots{
+enum Square_solution_cases{ // solution_cases
 
    INFINITY_SOLUTIONS = -1,
    NO_ROOTS,
    ONE_ROOT,
    TWO_ROOTS,
    LINEAR_EQUATION
+};
 
-
+struct Square_equation_coefs{
+    double a;
+    double b;
+    double c;
 };
 
 void solver (double a, double b, double c);
 
-Square_equations_roots Square_root_counter (double a, double b, double c, double *discriminant);
+Square_solution_cases Square_solution_cases_func (double a, double b, double c, double *discriminant);
 
 void infinity_solutions ();
 
@@ -46,13 +49,17 @@ void cin_coef (int *ch, double *a, double *b, double *c);
 
 void charchecker (int *ch);
 
+void get_correct_input (double *inputParam, char curr_input_param);
+
+void print_enter_coef (char coef);
+
 
 int main (){
 
     double a = 0;
     double b = 0;
     double c = 0;
-    int ch = 0;
+    int ch = 0; // char
 
     cin_coef (&ch, &a, &b, &c);
 
@@ -103,7 +110,7 @@ void linear_equation (double b, double c){
 
     else{
 
-        printf("уравнение линейное, его решение = %g\n", -b/c);
+        printf("уравнение линейное, его решение = %g\n", -b/c); // -c/b
 
     }
 
@@ -115,7 +122,10 @@ double Discriminant_calculation (double a, double b, double c){
 
 }
 
-Square_equations_roots Square_root_counter (double a, double b, double c, double *discriminant){
+Square_solution_cases Square_solution_cases_func (double a, double b, double c, double *discriminant){
+
+    assert(discriminant != nullptr);
+    assert(isnormal(a));
 
     if (compare_double(a)){   // linear equation
 
@@ -149,7 +159,7 @@ Square_equations_roots Square_root_counter (double a, double b, double c, double
     }
 }
 
-bool compare_double (double param){
+bool compare_double (double param){ //zero; make comparedouble(double num1, double num2)
 
     if (fabs(param) < EPSILON){
 
@@ -160,11 +170,24 @@ bool compare_double (double param){
     return false;
 }
 
+/*
+    int comparator(double var1, double var2)
+    {
+        static double EPSILON = 1e-7;
+
+        double delta = var1 - var2;
+        if (delta > 0)
+        {
+            return 1;
+        }
+        ...
+    }
+*/
 
 void cin_coef (int *ch, double *a, double *b, double *c){
 
     printf("Привет, эта программа решает квадратное уравнение, После каждого коэффициента вводите пробел\n");
-    printf("Когда будете готовы вводить коэффициеты, нажмите Enter");
+    printf("Когда будете готовы вводить коэффициеты, нажмите Enter");   // greetings?
 
     charchecker (ch);
     a_coef (a);
@@ -180,50 +203,76 @@ void charchecker (int *ch){
         while (getchar() != '\n');
         printf("некорректный ввод, попробуйте еще раз\n");
 
-        charchecker (ch);
+        charchecker (ch);    // лучше через цикл
 
     }
 }
 
-void a_coef (double *a){
+void a_coef (double *a){    // _input
 
-    printf("Введите коэффициент a = ");
+    char curr_coef = 'a';
+    get_correct_input (a, curr_coef);
+    /*while (!(scanf("%lf", a))){
 
-    if (!(scanf("%lf", a))){
+        while (getchar () != '\n');
+        printf("Некоректный ввод, повторите еще раз\n");
+        printf("Введите коэффициент A = ");
+    }
+
+    if (!(scanf("%lf", a))){            // копипаст!
         while (getchar () != '\n');
         printf("Некоректный ввод, повторите еще раз\n");
         a_coef (a);
-    }
+    } */
 }
 
 void b_coef (double *b){
 
-    printf("Введите коэффициент b = ");
+    char curr_coef = 'b';
+    get_correct_input (b, curr_coef);
+    /*printf("Введите коэффициент b = ");
 
     if (!(scanf("%lf", b))){
         while (getchar () != '\n');
         printf("Некоректный ввод, повторите еще раз\n");
         b_coef (b);
-    }
+    }*/
 }
 
 void c_coef (double *c){
 
-    printf("Введите коэффициент с = ");
+    char curr_coef = 'c';
+    get_correct_input (c, curr_coef);
+    /*printf("Введите коэффициент с = ");
 
     if (!(scanf("%lf", c))){
         while (getchar () != '\n');
         printf("Некоректный ввод, повторите еще раз\n");
         c_coef (c);
+    }*/
+}
+
+void get_correct_input (double *inputParam, char curr_input_param){
+
+    print_enter_coef (curr_input_param);
+    while (!(scanf("%lf", inputParam))){
+
+        while (getchar () != '\n');
+        printf("Некоректный ввод, повторите еще раз\n");
+        print_enter_coef (curr_input_param);
+
     }
 }
 
+void print_enter_coef (char coef){
 
+    printf("Введите коэффициент %c = ", coef);
+}
 
 void solver (double a, double b, double c){
 
     double discriminant = 0;
-    Square_equations_roots Root_counter = Square_root_counter (a, b, c, &discriminant);
+    Square_solution_cases Root_counter = Square_solution_cases_func (a, b, c, &discriminant);
 
     switch (Root_counter){
 
