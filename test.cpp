@@ -1,7 +1,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <TXLib.h>
-#include <stddef.h>
 
 
 enum Square_solution_cases{ // solution_cases
@@ -11,13 +10,6 @@ enum Square_solution_cases{ // solution_cases
    ONE_ROOT,
    TWO_ROOTS,
    LINEAR_EQUATION
-};
-
-enum comparator_decrypt {
-
-    FIRST_GREATER = 1,
-    SECOND_GREATER = 2,
-    EQUAL = 0
 };
 
 struct Square_equation_coefs{
@@ -103,17 +95,7 @@ void one_root (struct Square_equation_coefs *equation_coef){
 
     double solution = -b/(2*a);
 
-    if (compare_double_with_zero(solution)){
-
-        printf("дискриминант = 0, решение единственно, оно равно 0\n");
-
-    }
-
-    else{
-
-        printf("дискриминант = 0, решение единственно, оно равно %g\n", b/(-2*a));
-
-    }
+    printf("дискриминант = 0, решение единственно, оно равно %g\n", solution);
 
 }
 
@@ -139,30 +121,10 @@ void linear_equation (struct Square_equation_coefs *equation_coef){
     assert(equation_coef != nullptr);
 
     double b = equation_coef->b;
+    double c = equation_coef->c;
+    double solution = -c/b;
 
-    if (compare_double_with_zero(b)){
-
-        printf("Решений нет\n");
-
-    }
-
-    else{
-
-        double c = equation_coef->c;
-        double solution = -c/b;
-
-        if (compare_double_with_zero(solution)){
-
-            printf("уравнение линейное, его решение = 0");
-
-        }
-
-        else{
-
-            printf("уравнение линейное, его решение = %g\n", -c/b);
-
-        }
-    }
+    printf("уравнение линейное, его решение = %g\n", solution);
 }
 
 double Discriminant_calculation (struct Square_equation_coefs *equation_coef){
@@ -230,6 +192,7 @@ bool compare_double_with_zero (double param){
 void cin_coef (int *ch, struct Square_equation_coefs *equation_coef){
 
     assert(equation_coef != nullptr);
+    assert(ch != nullptr);
 
     greetings_user ();
     charchecker (ch);
