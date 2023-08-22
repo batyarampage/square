@@ -21,36 +21,37 @@ enum comparator_decrypt {
 };
 
 struct Square_equation_coefs{
-    double a;
-    double b;
-    double c;
+    double a = 0;
+    double b = 0;
+    double c = 0;
 };
 
-void solver (double a, double b, double c);
 
-Square_solution_cases Square_solution_cases_func (double a, double b, double c, double *discriminant);
+void solver (struct Square_equation_coefs *equation_coef);
+
+Square_solution_cases Square_solution_cases_func (struct Square_equation_coefs *equation_coef, double *discriminant);
 
 void infinity_solutions ();
 
-double Discriminant_calculation (double a, double b, double c);
+double Discriminant_calculation (struct Square_equation_coefs *equation_coef);
 
 void no_roots ();
 
-void one_root (double a, double b);
+void one_root (struct Square_equation_coefs *equation_coef);
 
-void two_roots (double a, double b, double discriminant);
+void two_roots (struct Square_equation_coefs *equation_coef, double discriminant);
 
-void linear_equation (double b, double c);
+void linear_equation (struct Square_equation_coefs *equation_coef);
 
 bool compare_double_with_zero (double param);
 
-void a_coef_input (double *a);
+void a_coef_input (struct Square_equation_coefs *equation_coef);
 
-void b_coef_input (double *b);
+void b_coef_input (struct Square_equation_coefs *equation_coef);
 
-void c_coef_input (double *c);
+void c_coef_input (struct Square_equation_coefs *equation_coef);
 
-void cin_coef (int *ch, double *a, double *b, double *c);
+void cin_coef (int *ch, struct Square_equation_coefs *equation_coef);
 
 void charchecker (int *ch);
 
@@ -66,14 +67,13 @@ bool cin_is_normal ();
 
 int main (){
 
-    double a = 0;
-    double b = 0;
-    double c = 0;
     int ch = 0; // char
 
-    cin_coef (&ch, &a, &b, &c);
+    struct Square_equation_coefs equation_coef;
 
-    solver (a,b,c);
+    cin_coef (&ch, &equation_coef);
+
+    solver (&equation_coef);
 
     return 0;
 }
@@ -91,14 +91,17 @@ void no_roots (){
 
 }
 
-void one_root (double a, double b){
+void one_root (struct Square_equation_coefs *equation_coef){
 
+    double b = equation_coef->b;
+    double a = equation_coef->a;
     printf("дискриминант = 0, решение единственно, оно равно %g\n", -b/(2*a));
 
 }
 
-void two_roots (double a, double b, double discriminant){
-
+void two_roots (struct Square_equation_coefs *equation_coef, double discriminant){
+    double b = equation_coef->b;
+    double a = equation_coef->a;
     double sqrt_discriminant = sqrt(discriminant);
 
     double x1 = (-b+sqrt_discriminant)/(2*a);
@@ -110,7 +113,9 @@ void two_roots (double a, double b, double discriminant){
 
 }
 
-void linear_equation (double b, double c){
+void linear_equation (struct Square_equation_coefs *equation_coef){
+
+    double b = equation_coef->b;
 
     if (compare_double_with_zero(b)){
 
@@ -120,26 +125,31 @@ void linear_equation (double b, double c){
 
     else{
 
+        double c = equation_coef->c;
         printf("уравнение линейное, его решение = %g\n", -c/b);
 
     }
 
 }
 
-double Discriminant_calculation (double a, double b, double c){
+double Discriminant_calculation (struct Square_equation_coefs *equation_coef){
+
+    double a = equation_coef->a;
+    double b = equation_coef->b;
+    double c = equation_coef->c;
 
     return b*b-4*a*c;
 
 }
 
-Square_solution_cases Square_solution_cases_func (double a, double b, double c, double *discriminant){
+Square_solution_cases Square_solution_cases_func (struct Square_equation_coefs *equation_coef, double *discriminant){
 
     assert(discriminant != nullptr);
 
 
-    if (compare_double_with_zero(a)){   // linear equation
+    if (compare_double_with_zero(equation_coef->a)){   // linear equation
 
-        if ((compare_double_with_zero(b)) && (compare_double_with_zero(c))){
+        if ((compare_double_with_zero(equation_coef->b)) && (compare_double_with_zero(equation_coef->c))){
 
             return INFINITY_SOLUTIONS;
         }
@@ -150,7 +160,7 @@ Square_solution_cases Square_solution_cases_func (double a, double b, double c, 
 
     else{
 
-        *discriminant = Discriminant_calculation (a, b, c);
+        *discriminant = Discriminant_calculation (equation_coef);
 
         if (compare_double_with_zero(*discriminant)){
 
@@ -195,13 +205,15 @@ bool compare_double_with_zero (double param){
     }
 */
 
-void cin_coef (int *ch, double *a, double *b, double *c){
+void cin_coef (int *ch, struct Square_equation_coefs *equation_coef){
+
+    assert(equation_coef != nullptr);
 
     greetings_user ();
     charchecker (ch);
-    a_coef_input (a);
-    b_coef_input (b);
-    c_coef_input (c);
+    a_coef_input (equation_coef);
+    b_coef_input (equation_coef);
+    c_coef_input (equation_coef);
 
 }
 
@@ -218,33 +230,29 @@ void charchecker (int *ch){
     }
 }
 
-void a_coef_input (double *a){
+void a_coef_input (struct Square_equation_coefs *equation_coef){
 
-    assert (a != nullptr);
     char curr_coef = 'a';
-    get_correct_input (a, curr_coef);
+    get_correct_input (&(equation_coef->a), curr_coef);
 
 }
 
-void b_coef_input (double *b){
+void b_coef_input (struct Square_equation_coefs *equation_coef){
 
-    assert(b != nullptr);
     char curr_coef = 'b';
-    get_correct_input (b, curr_coef);
+    get_correct_input (&(equation_coef->b), curr_coef);
 
 }
 
-void c_coef_input (double *c){
+void c_coef_input (struct Square_equation_coefs *equation_coef){
 
-    assert (c != nullptr);
     char curr_coef = 'c';
-    get_correct_input (c, curr_coef);
+    get_correct_input (&(equation_coef->c), curr_coef);
 
 }
 
 void get_correct_input (double *inputParam, char curr_input_param){
 
-    assert(inputParam != nullptr);
     print_enter_coef (curr_input_param);
     while ((!(scanf("%lg", inputParam))) || (cin_is_normal ())){
 
@@ -288,10 +296,10 @@ bool cin_is_normal (){
     }
 }*/
 
-void solver (double a, double b, double c){
+void solver (struct Square_equation_coefs *equation_coef){
 
     double discriminant = 0;
-    Square_solution_cases Root_counter = Square_solution_cases_func (a, b, c, &discriminant);
+    Square_solution_cases Root_counter = Square_solution_cases_func (equation_coef, &discriminant);
 
     switch (Root_counter){
 
@@ -311,20 +319,20 @@ void solver (double a, double b, double c){
 
         case ONE_ROOT:{
 
-            one_root (a, b);
+            one_root (equation_coef);
             break;
 
         }
 
         case TWO_ROOTS:{
 
-            two_roots (a, b, discriminant);
+            two_roots (equation_coef, discriminant);
             break;
         }
 
         case LINEAR_EQUATION:{
 
-            linear_equation (b, c);
+            linear_equation (equation_coef);
             break;
 
         }
