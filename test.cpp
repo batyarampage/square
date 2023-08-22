@@ -16,11 +16,12 @@ enum Square_solution_cases{ // solution_cases
 enum comparator_decrypt {
 
     FIRST_GREATER = 1,
-    SECOND_GREATER,
-    EQUAL
+    SECOND_GREATER = 2,
+    EQUAL = 0
 };
 
 struct Square_equation_coefs{
+
     double a = 0;
     double b = 0;
     double c = 0;
@@ -63,6 +64,8 @@ void greetings_user ();
 
 bool cin_is_normal ();
 
+int comparator_double (double num1, double num2);
+
 
 
 int main (){
@@ -93,13 +96,31 @@ void no_roots (){
 
 void one_root (struct Square_equation_coefs *equation_coef){
 
+    assert(equation_coef != nullptr);
+
     double b = equation_coef->b;
     double a = equation_coef->a;
-    printf("дискриминант = 0, решение единственно, оно равно %g\n", -b/(2*a));
+
+    double solution = -b/(2*a);
+
+    if (compare_double_with_zero(solution)){
+
+        printf("дискриминант = 0, решение единственно, оно равно 0\n");
+
+    }
+
+    else{
+
+        printf("дискриминант = 0, решение единственно, оно равно %g\n", b/(-2*a));
+
+    }
 
 }
 
 void two_roots (struct Square_equation_coefs *equation_coef, double discriminant){
+
+    assert(equation_coef != nullptr);
+
     double b = equation_coef->b;
     double a = equation_coef->a;
     double sqrt_discriminant = sqrt(discriminant);
@@ -115,6 +136,8 @@ void two_roots (struct Square_equation_coefs *equation_coef, double discriminant
 
 void linear_equation (struct Square_equation_coefs *equation_coef){
 
+    assert(equation_coef != nullptr);
+
     double b = equation_coef->b;
 
     if (compare_double_with_zero(b)){
@@ -126,13 +149,25 @@ void linear_equation (struct Square_equation_coefs *equation_coef){
     else{
 
         double c = equation_coef->c;
-        printf("уравнение линейное, его решение = %g\n", -c/b);
+        double solution = -c/b;
 
+        if (compare_double_with_zero(solution)){
+
+            printf("уравнение линейное, его решение = 0");
+
+        }
+
+        else{
+
+            printf("уравнение линейное, его решение = %g\n", -c/b);
+
+        }
     }
-
 }
 
 double Discriminant_calculation (struct Square_equation_coefs *equation_coef){
+
+    assert(equation_coef != nullptr);
 
     double a = equation_coef->a;
     double b = equation_coef->b;
@@ -145,7 +180,7 @@ double Discriminant_calculation (struct Square_equation_coefs *equation_coef){
 Square_solution_cases Square_solution_cases_func (struct Square_equation_coefs *equation_coef, double *discriminant){
 
     assert(discriminant != nullptr);
-
+    assert(equation_coef != nullptr);
 
     if (compare_double_with_zero(equation_coef->a)){   // linear equation
 
@@ -182,6 +217,7 @@ Square_solution_cases Square_solution_cases_func (struct Square_equation_coefs *
 bool compare_double_with_zero (double param){
 
     static double EPSILON = 1e-10;
+
     if (fabs(param) < EPSILON){
 
         return true;
@@ -190,20 +226,6 @@ bool compare_double_with_zero (double param){
 
     return false;
 }
-
-/*
-    int comparator(double var1, double var2)
-    {
-        static double EPSILON = 1e-7;
-
-        double delta = var1 - var2;
-        if (delta > 0)
-        {
-            return 1;
-        }
-        ...
-    }
-*/
 
 void cin_coef (int *ch, struct Square_equation_coefs *equation_coef){
 
@@ -228,18 +250,11 @@ void charchecker (int *ch){
         printf("некорректный ввод, попробуйте еще раз ввести пробел\n");
         *ch = getchar ();
     }
-
-
-    /*if (!(*ch == '\n')){
-        while (getchar() != '\n');
-        printf("некорректный ввод, попробуйте еще раз\n");
-
-        charchecker (ch);
-
-    }*/
 }
 
 void a_coef_input (struct Square_equation_coefs *equation_coef){
+
+    assert(equation_coef != nullptr);
 
     char curr_coef = 'a';
     get_correct_input (&(equation_coef->a), curr_coef);
@@ -248,12 +263,16 @@ void a_coef_input (struct Square_equation_coefs *equation_coef){
 
 void b_coef_input (struct Square_equation_coefs *equation_coef){
 
+    assert(equation_coef != nullptr);
+
     char curr_coef = 'b';
     get_correct_input (&(equation_coef->b), curr_coef);
 
 }
 
 void c_coef_input (struct Square_equation_coefs *equation_coef){
+
+    assert(equation_coef != nullptr);
 
     char curr_coef = 'c';
     get_correct_input (&(equation_coef->c), curr_coef);
@@ -262,8 +281,11 @@ void c_coef_input (struct Square_equation_coefs *equation_coef){
 
 void get_correct_input (double *inputParam, char curr_input_param){
 
+    assert(inputParam != nullptr);
+
     print_enter_coef (curr_input_param);
-    while ((!(scanf("%lg", inputParam))) || (cin_is_normal ())){
+
+    while ((!(scanf("%lg", inputParam))) || ((cin_is_normal ()  ))){
 
         while (getchar () != '\n');
         printf("Ќекоректный ввод, повторите еще раз\n");
@@ -286,12 +308,32 @@ void greetings_user (){
 
 bool cin_is_normal (){
 
-    while (getchar () != '\n'){
+    if (getchar () != '\n'){
 
         return true;
     }
 
     return false;
+
+}
+
+int comparator_double (double num1, double num2){
+
+    static double EPSILON = 1e-10;
+
+    if (num1-num2 > EPSILON){
+
+        return 1;
+
+    }
+
+    else if (num2-num1 > EPSILON){
+
+        return 2;
+
+    }
+
+    return 0;
 
 }
 
@@ -306,6 +348,8 @@ bool cin_is_normal (){
 }*/
 
 void solver (struct Square_equation_coefs *equation_coef){
+
+    assert(equation_coef != nullptr);
 
     double discriminant = 0;
     Square_solution_cases Root_counter = Square_solution_cases_func (equation_coef, &discriminant);
