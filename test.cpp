@@ -221,13 +221,22 @@ void charchecker (int *ch){
 
     assert (ch != nullptr);
     *ch = getchar ();
-    if (!(*ch == '\n')){
+
+    while (!(*ch == '\n')){
+
+        while (getchar() != '\n');
+        printf("некорректный ввод, попробуйте еще раз ввести пробел\n");
+        *ch = getchar ();
+    }
+
+
+    /*if (!(*ch == '\n')){
         while (getchar() != '\n');
         printf("некорректный ввод, попробуйте еще раз\n");
 
-        charchecker (ch);    // лучше через цикл
+        charchecker (ch);
 
-    }
+    }*/
 }
 
 void a_coef_input (struct Square_equation_coefs *equation_coef){
