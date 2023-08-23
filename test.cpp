@@ -56,13 +56,12 @@ void greetings_user ();
 
 bool cin_is_normal ();
 
-int comparator_double (double num1, double num2);
 
 
 
 int main (){
 
-    int ch = 0; // char
+    int ch = 0; // first char
 
     struct Square_equation_coefs equation_coef;
 
@@ -280,35 +279,6 @@ bool cin_is_normal (){
 
 }
 
-int comparator_double (double num1, double num2){
-
-    static double EPSILON = 1e-10;
-
-    if (num1-num2 > EPSILON){
-
-        return 1;
-
-    }
-
-    else if (num2-num1 > EPSILON){
-
-        return 2;
-
-    }
-
-    return 0;
-
-}
-
-/*int compare_double (double num1, double num2){
-
-    static double EPSILON = 1e-10;
-
-    if ((num1-num2) > EPSILON){
-
-        return num1g
-    }
-}*/
 
 void solver (struct Square_equation_coefs *equation_coef){
 
