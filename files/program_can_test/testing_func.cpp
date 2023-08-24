@@ -9,10 +9,6 @@
 #include "const_def.h"
 #include "struct_of_square_equation.h"
 
-bool compare_two_double_in_test (double num1, double num2);
-
-void cin_from_file (struct test_square_coefs all_test[]);
-
 void testing (struct test_square_coefs all_test[]){
 
     cin_from_file (all_test);
@@ -51,7 +47,10 @@ void testing (struct test_square_coefs all_test[]){
         }
     }
 
-    printf("\n");
+    for (int i = 0; i<test_count-1; i++){
+
+        getchar ();
+    }
 }
 
 bool compare_two_double_in_test (double num1, double num2){
@@ -90,5 +89,43 @@ void cin_from_file (struct test_square_coefs all_test[]){
         all_test[i].x1r = x1ref;
         all_test[i].x2r = x2ref;
 
+    }
+}
+
+void greeting_user_for_test (){
+
+    printf("Если хотите прогнать unit-тесты, то введите букву t, иначе любое другое число или букву\n");
+
+}
+
+void is_user_wonna_test (){
+
+    greeting_user_for_test ();
+
+    int parametr = 0; // вводимое число
+    bool aim_user = false;
+    check_user_input (&parametr, &aim_user);
+
+    if (aim_user){
+
+        test_square_coefs all_test[test_count] = {{}};
+
+        testing (all_test);
+    }
+
+    else{
+
+        while (getchar () != '\n');
+
+    }
+}
+
+void check_user_input (int *parametr, bool *aim_user){
+
+    *parametr = getchar ();
+
+    if (*parametr == 't'){
+
+        *aim_user = true;
     }
 }
