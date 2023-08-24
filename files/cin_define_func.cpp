@@ -67,9 +67,10 @@ void b_coef_input (struct square_equation_coefs *equation_coef){
 /// Функция ввода коэффциента c
 void c_coef_input (struct square_equation_coefs *equation_coef){
 
-    assert(equation_coef != nullptr);
+    assert(equation_coef != NULL);
 
     char curr_coef = 'c';
+
     get_correct_input (&(equation_coef->c), curr_coef);
 
 }
@@ -89,10 +90,31 @@ void get_correct_input (double *inputParam, char curr_input_param){
 
     print_enter_coef (curr_input_param);
 
-    while ((!(scanf("%lg", inputParam))) || ((cin_is_normal ()))){
+    int symbol = 0;
 
-        while (getchar () != '\n');
+    symbol = getchar ();
+
+    while (true){
+
+        if (symbol == '\n'){
+
+            printf("Некоректный ввод, повторите еще раз\n");
+            print_enter_coef (curr_input_param);
+            symbol = getchar ();
+        }
+
+        else{
+
+            ungetc (symbol, stdin);
+            break;
+        }
+    }
+
+    while ((!scanf("%lg", inputParam)) || (getchar () != '\n')){
+
         printf("Некоректный ввод, повторите еще раз\n");
+        while (getchar () != '\n');
+
         print_enter_coef (curr_input_param);
 
     }
@@ -111,17 +133,3 @@ void greetings_user (){
     printf("Когда будете готовы вводить коэффициеты, нажмите Enter");
 
 }
-
-///Функция для проверки, что пользователь помимо коэффициентов ввел еще посторонние символы в буфер ввода
-bool cin_is_normal (){
-
-    if (getchar () != '\n'){
-
-        return true;
-    }
-
-    return false;
-
-}
-
-

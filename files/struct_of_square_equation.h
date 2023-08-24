@@ -12,4 +12,11 @@ struct square_equation_coefs{
     double c = 0;
 };
 
+struct roots_square_equation{
+
+    double x1 = 0;
+    double x2 = 0;
+
+};
+
 #endif

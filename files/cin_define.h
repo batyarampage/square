@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <TXLib.h>
 #include "struct_of_square_equation.h"
+#include "enumerate.h"
 
 #ifndef cin_define
 #define cin_define
@@ -22,7 +23,5 @@ void get_correct_input (double *inputParam, char curr_input_param);
 void print_enter_coef (char coef);
 
 void greetings_user ();
-
-bool cin_is_normal ();
 
 #endif
