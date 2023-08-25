@@ -4,7 +4,6 @@
 #include <assert.h>
 #include <math.h>
 
-
 void printer (Type_of_equation const *type_of_input_equation, struct roots_square_equation const *roots_square, Count_of_roots const *count_of_roots){
 
     assert(count_of_roots != nullptr);
@@ -67,7 +66,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
 
 void print_infinity_solution (){
 
-    printf("��������� ������ ����������� ���������� �������");
+    printf("РЈСЂР°РІРЅРµРЅРёРµ РёРјРјРµРµС‚ Р±РµСЃРєРѕРЅРµС‡РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµС€РµРЅРёР№");
 }
 
 void print_linear_equation (struct roots_square_equation const *roots_square){
@@ -80,12 +79,12 @@ void print_linear_equation (struct roots_square_equation const *roots_square){
 
     if (fabs(x1) < epsilon){
 
-        printf("��������� ��������, ��� ������� ����� 0");
+        printf("РЈСЂР°РІРЅРµРЅРёРµ Р»РёРЅРµР№РЅРѕРµ, РµРіРѕ СЂРµС€РµРЅРёРµ СЂР°РІРЅРѕ 0");
     }
 
     else {
 
-        printf("��������� ��������, ��� ������� ����� %g", roots_square->x1);
+        printf("РЈСЂР°РІРЅРµРЅРёРµ Р»РёРЅРµР№РЅРѕРµ, РµРіРѕ СЂРµС€РµРЅРёРµ СЂР°РІРЅРѕ %g", roots_square->x1);
     }
 }
 
@@ -99,12 +98,12 @@ void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
     if (fabs(x1) < epsilon){
 
-        printf("������������ ����� 0, ������� �����������, ��� ����� 0");
+        printf("Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ СЂР°РІРµРЅ 0, СЂРµС€РµРЅРёРµ РµРґРёРЅСЃС‚РІРµРЅРЅРѕ, РѕРЅРѕ СЂР°РІРЅРѕ 0");
     }
 
     else {
 
-        printf("������������ ����� 0, ������� �����������, ��� ����� %g", x1);
+        printf("Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ СЂР°РІРµРЅ 0, СЂРµС€РµРЅРёРµ РµРґРёРЅСЃС‚РІРµРЅРЅРѕ, РѕРЅРѕ СЂР°РІРЅРѕ %g", x1);
     }
 
 
@@ -113,20 +112,20 @@ void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
 void print_negative_discriminant (){
 
-    printf("������������ ������ 0, ������ ���");
+    printf("Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ РјРµРЅСЊС€Рµ 0, РєРѕСЂРЅРµР№ РЅРµС‚");
 
 }
 
 void print_linear_equation_zero (){
 
-    printf("� ��������� ��� �������");
+    printf("РЈ СѓСЂР°РІРЅРµРЅРёСЏ РЅРµС‚ СЂРµС€РµРЅРёР№");
 }
 
 void print_positive_discriminant (struct roots_square_equation const *roots_square){
 
     assert(roots_square != nullptr);
 
-    printf("������������� ������������, 2 �����\n");
+    printf("РџРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Р№ РґРёСЃРєСЂРёРјРёРЅР°РЅС‚, 2 РєРѕСЂРЅСЏ\n");
     printf("x1 = %g\n", roots_square->x1);
     printf("x2 = %g\n", roots_square->x2);
 }
