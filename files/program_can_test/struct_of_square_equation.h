@@ -12,9 +12,13 @@ struct square_equation_coefs{
     double c = 0;
 };
 
-struct roots_square_equation{
 
+///Структура, указывающая на корни квадратного уравния
+struct roots_square_equation{
+    ///Первый корень квадратного уравнения (в него записывается корень, если решение единственно)
     double x1 = 0;
+
+    /// Второй корень квадратного уравнения
     double x2 = 0;
 
 };

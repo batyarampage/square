@@ -14,7 +14,7 @@ void solving_linear_equation (struct square_equation_coefs *equation_coef, struc
     roots_square->x1 = solution;
 }
 
-void zero_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
+void solve_equation_with_zero_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
     assert(roots_square != nullptr);
@@ -33,11 +33,10 @@ void zero_discriminant (struct square_equation_coefs *equation_coef, struct root
     else{
 
         roots_square->x1 = solution;
-
     }
 }
 
-void positive_discriminant(struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
+void solve_equation_with_positive_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
 
     assert(equation_coef != nullptr);
     assert(roots_square != nullptr);
@@ -56,7 +55,7 @@ void positive_discriminant(struct square_equation_coefs *equation_coef, struct r
 
 }
 
-type_of_equation type_of_equation_function (struct square_equation_coefs *equation_coef){
+Type_of_equation type_of_equation_function (struct square_equation_coefs *equation_coef){
 
     assert(equation_coef != nullptr);
 
@@ -64,7 +63,20 @@ type_of_equation type_of_equation_function (struct square_equation_coefs *equati
     double b = equation_coef->b;
     double c = equation_coef->c;
 
-    if (compare_double_with_zero(a) && compare_double_with_zero(b) && compare_double_with_zero(c)){
+    if (compare_double_with_zero(a)){
+
+        if (compare_double_with_zero(b) && compare_double_with_zero(c)){
+
+            return NOT_A_EQUATION;
+        }
+
+        return LINEAR_EQUATION;
+
+    }
+
+    return QUADRATIC_EQUATION;
+
+    /*if (compare_double_with_zero(a) && compare_double_with_zero(b) && compare_double_with_zero(c)){
 
         return NOT_A_EQUATION;//NOT_AN
 
@@ -76,14 +88,12 @@ type_of_equation type_of_equation_function (struct square_equation_coefs *equati
 
     }
 
-    return QUADRATIC_EQUATION;
+    return QUADRATIC_EQUATION;*/
 
 }
 
-count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
-                                    enum   type_of_equation const *type_of_input_equation,
-                                    struct roots_square_equation *roots_square){
-// const если передаешь по указателю и не меняешь в функции
+Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, enum Type_of_equation const *type_of_input_equation, struct roots_square_equation *roots_square){
+
     assert(equation_coef != nullptr);
     assert(roots_square != nullptr);
     assert(type_of_input_equation != nullptr);
@@ -124,7 +134,7 @@ count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
 
             if (compare_double_with_zero(discriminant)){
 
-                zero_discriminant (equation_coef, roots_square);//rename func
+                solve_equation_with_zero_discriminant (equation_coef, roots_square);//rename func
 
                 return ONE_ROOT;
 
@@ -132,7 +142,7 @@ count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
 
             else if (discriminant > 0){
 
-                positive_discriminant (equation_coef, roots_square, &discriminant);//rename func
+                solve_equation_with_positive_discriminant (equation_coef, roots_square, &discriminant);//rename func
                 return TWO_ROOT;
 
             }
@@ -163,7 +173,7 @@ double Discriminant_calculation (struct square_equation_coefs *equation_coef){
 
 bool compare_double_with_zero (double param){
 
-    static double EPSILON = 1e-20;
+    static double EPSILON = 1e-10;
 
     if (fabs(param) < EPSILON){
 

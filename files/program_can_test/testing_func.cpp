@@ -16,54 +16,57 @@ void testing (struct test_square_coefs all_test[]){
 
     int done_tests = 0;
 
-    if (ok_test){ // кодстайл
-    for (int i = 0; i < TEST_COUNT; i++){
+    if (ok_test){
 
-        struct square_equation_coefs local_coef;// copy from main
-        struct roots_square_equation local_roots;
+        for (int i = 0; i < TEST_COUNT; i++){
 
-        local_coef.a = all_test[i].a;
-        local_coef.b = all_test[i].b;
-        local_coef.c = all_test[i].c;
+            struct square_equation_coefs local_coef;
+            struct roots_square_equation local_roots;
 
-        type_of_equation type_of_input_equation = type_of_equation_function (&local_coef);
+            local_coef.a = all_test[i].a;
+            local_coef.b = all_test[i].b;
+            local_coef.c = all_test[i].c;
 
-        count_of_roots count_root1 = count_of_roots_func (&local_coef, &type_of_input_equation, &local_roots);
+            Type_of_equation type_of_input_equation = type_of_equation_function (&local_coef);
 
-        double x1ref = all_test[i].x1r;
-        double x2ref = all_test[i].x2r;
-        count_of_roots count_of_roots_ref = all_test[i].count_root;
+            Count_of_roots count_root1 = solving_equation (&local_coef, &type_of_input_equation, &local_roots);
 
-        double local_rootx1 = local_roots.x1;
-        double local_rootx2 = local_roots.x2;
+            double x1ref = all_test[i].x1r;
+            double x2ref = all_test[i].x2r;
+            Count_of_roots count_of_roots_ref = all_test[i].count_root;
+
+            double local_rootx1 = local_roots.x1;
+            double local_rootx2 = local_roots.x2;
 
 
-        if ((count_of_roots_ref != count_root1) || (compare_two_double_in_test (x1ref, local_rootx1)) || (compare_two_double_in_test (x2ref, local_rootx2))){
+            if ((count_of_roots_ref != count_root1) || (compare_two_double_in_test (x1ref, local_rootx1)) || (compare_two_double_in_test (x2ref, local_rootx2))){
 
-            printf("NOT PASSED TEST %d, x1ref = %g, x1 = %g, x2ref = %g, x2 = %g, количество корней ожидаемое = %d, реальное количество корней = %d\n", i+1, x1ref, local_roots.x1,x2ref,local_roots.x2, count_of_roots_ref, count_root1);
+                printf("\033[31m NOT PASSED TEST %d, x1ref = %g, x1 = %g, x2ref = %g, x2 = %g, количество корней ожидаемое = %d, реальное количество корней = %d\n \033[0m", i+1, x1ref, local_roots.x1,x2ref,local_roots.x2, count_of_roots_ref, count_root1);
 
+            }
+
+            else{
+
+                printf("\033[32m CORRECT TEST\n \033[0m");
+                done_tests++;
+
+            }
         }
 
-        else{
+        printf("\033[3;35m Корректно тестов = %d\n \033[0m", done_tests);
+        printf("\033[3;35m Некорректно тестов = %d \033[0m", TEST_COUNT-done_tests);
+        printf("\n");
 
-            printf("CORRECT TEST\n");
-            done_tests++;
+        for (int i = 0; i<TEST_COUNT-1; i++){
 
+            getchar (); // нужно для того, чтобы убрать лишние пробелы
         }
     }
 
-    printf("Корректно тестов = %d\n", done_tests);
-    printf("Некорректно тестов = %d\n", TEST_COUNT-done_tests);
-
-    for (int i = 0; i<TEST_COUNT-1; i++){
-
-        getchar (); // нужно для того, чтобы убрать лишние пробелы
-    }}
     else{
 
         printf("файл не существует\n");
         getchar();
-
     }
 }
 
@@ -108,13 +111,13 @@ void cin_from_file (struct test_square_coefs all_test[], bool *ok_test){
             double a = 0;
             double b = 0;
             double c = 0;
-            int roots_quantity = 0;//roots_quantity
+            int roots_quantity = 0;
             double x1ref = 0;
             double x2ref = 0;
 
             fscanf(fle, "%lg%lg%lg%d%lg%lg", &a, &b, &c, &roots_quantity, &x1ref, &x2ref);
 
-            count_of_roots count_roots1 = count_of_roots (roots_quantity);
+            Count_of_roots count_roots1 = Count_of_roots (roots_quantity);
 
             all_test[i].a = a;
             all_test[i].b = b;
@@ -122,7 +125,6 @@ void cin_from_file (struct test_square_coefs all_test[], bool *ok_test){
             all_test[i].count_root = count_roots1;
             all_test[i].x1r = x1ref;
             all_test[i].x2r = x2ref;
-
         }
     }
 }
@@ -164,7 +166,9 @@ void check_user_input (int *parametr, bool *aim_user){
 
     *parametr = getchar ();
 
-    if (*parametr == 't'){
+    const int TEST_LAUNCH_MARKER = 't';
+
+    if (*parametr == TEST_LAUNCH_MARKER){
 
         *aim_user = true;
     }
