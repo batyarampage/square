@@ -89,7 +89,7 @@ void print_linear_equation (struct roots_square_equation const *roots_square){
     }
 }
 
- void print_zero_discriminant (struct roots_square_equation const *roots_square){
+void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
     assert(roots_square != nullptr);
 
@@ -117,12 +117,12 @@ void print_negative_discriminant (){
 
 }
 
-static void print_linear_equation_zero (){
+void print_linear_equation_zero (){
 
     printf("У уравнения нет решений");
 }
 
-static void print_positive_discriminant (struct roots_square_equation const *roots_square){
+void print_positive_discriminant (struct roots_square_equation const *roots_square){
 
     assert(roots_square != nullptr);
 

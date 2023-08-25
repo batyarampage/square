@@ -16,9 +16,8 @@ int main (){
 
     get_coefs (&equation_coef);
 
-    Type_of_equation type_of_input_equation = type_of_equation_function (&equation_coef);// enum с большой
-
-    Count_of_roots roots_quantity = solving_equation (&equation_coef, &type_of_input_equation, &roots_square);//   enum с большой
+    Type_of_equation type_of_input_equation = type_of_equation_function (&equation_coef);
+    Count_of_roots roots_quantity = solving_equation (&equation_coef, &type_of_input_equation, &roots_square);
 
     printer (&type_of_input_equation, &roots_square, &roots_quantity);
 
