@@ -7,6 +7,13 @@
 #include "testing_func.h"
 #include "const_def.h"
 
+/*!
+
+ \author batyaRampage
+ \version 1.0
+ \date 25.08.2023
+
+*/
 int main (){
 
     is_user_wonna_test ();
