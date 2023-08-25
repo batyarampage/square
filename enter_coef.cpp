@@ -26,7 +26,7 @@ void check_readiness_to_enter_coef (int *ch){
     while (!(*ch == '\n')){
 
         while (getchar() != '\n');
-        printf("некорректный ввод, попробуйте еще раз ввести пробел\n");
+        printf("РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ, РїРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р· РІРІРµСЃС‚Рё РїСЂРѕР±РµР»\n");
         *ch = getchar ();
     }
 }
@@ -45,7 +45,7 @@ void get_correct_input (double *inputParam, const char * curr_input_param){
 
         if (symbol == '\n'){
 
-            printf("Некоректный ввод, повторите еще раз\n");
+            printf("РќРµРєРѕСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ, РїРѕРІС‚РѕСЂРёС‚Рµ РµС‰Рµ СЂР°Р·\n");
             print_enter_coef (curr_input_param);
             symbol = getchar ();
         }
@@ -59,7 +59,7 @@ void get_correct_input (double *inputParam, const char * curr_input_param){
 
     while ((!scanf("%lg", inputParam)) || (getchar () != '\n')){
 
-        printf("Некоректный ввод, повторите еще раз\n");
+        printf("РќРµРєРѕСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ, РїРѕРІС‚РѕСЂРёС‚Рµ РµС‰Рµ СЂР°Р·\n");
         while (getchar () != '\n');
 
         print_enter_coef (curr_input_param);
@@ -69,12 +69,12 @@ void get_correct_input (double *inputParam, const char * curr_input_param){
 
 void print_enter_coef (const char * coef){
 
-    printf("Введите коэффициент %c = ", *coef);
+    printf("Р’РІРµРґРёС‚Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚ %c = ", *coef);
 }
 
 void greetings_user (){
 
-    printf("Привет, эта программа решает квадратное уравнение, После каждого коэффициента вводите пробел\n");
-    printf("Когда будете готовы вводить коэффициеты, нажмите Enter");
+    printf("РџСЂРёРІРµС‚, СЌС‚Р° РїСЂРѕРіСЂР°РјРјР° СЂРµС€Р°РµС‚ РєРІР°РґСЂР°С‚РЅРѕРµ СѓСЂР°РІРЅРµРЅРёРµ, РџРѕСЃР»Рµ РєР°Р¶РґРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІРІРѕРґРёС‚Рµ РїСЂРѕР±РµР»\n");
+    printf("РљРѕРіРґР° Р±СѓРґРµС‚Рµ РіРѕС‚РѕРІС‹ РІРІРѕРґРёС‚СЊ РєРѕСЌС„С„РёС†РёРµС‚С‹, РЅР°Р¶РјРёС‚Рµ Enter");
 
 }
