@@ -1,12 +1,9 @@
-#include "cin_define.h"
+#include "enter_coef.h"
+#include <stdio.h>
+#include <TXLib.h>
+#include <assert.h>
 
-/// Функция, вызываемая в main, которая связана со всем вводом коэффицентов квадратного уравнения
-/*!
 
-    Инициализируется переменная ch, чтобы передав адрес ch в charchecker, можно было контролировать корректный ввод
-
-    \param equation_coef - указатель на структуру с коэффициентами квадратного уравнения
-*/
 
 void cin_coef (struct square_equation_coefs *equation_coef){
 
@@ -15,10 +12,14 @@ void cin_coef (struct square_equation_coefs *equation_coef){
     int ch = 0;
 
     greetings_user ();
-    charchecker (&ch);
-    a_coef_input (equation_coef);
-    b_coef_input (equation_coef);
+    check_readiness_to_enter_coef (&ch);
+    a_coef_input (equation_coef);//get_correct_input(&(equation_coef->a), 'a') указатель на поле структуры и передавать char сразу же
+    b_coef_input (equation_coef);//get_correct_input(&(equation_coef->b), 'b') // define
     c_coef_input (equation_coef);
+
+    /*
+    a
+    */
 
 }
 
@@ -29,7 +30,7 @@ void cin_coef (struct square_equation_coefs *equation_coef){
     \param ch - указатель, для контроля ввода пробела
 
 */
-void charchecker (int *ch){
+void check_readiness_to_enter_coef (int *ch){//rename check_readiness_to_enter_coef
 
     assert (ch != nullptr);
     *ch = getchar ();
@@ -43,7 +44,7 @@ void charchecker (int *ch){
 }
 
 /// Функция ввода коэффциента a
-void a_coef_input (struct square_equation_coefs *equation_coef){
+void a_coef_input (struct square_equation_coefs *equation_coef){//указатель на поле структуры
 
     assert(equation_coef != nullptr);
 
@@ -67,7 +68,7 @@ void b_coef_input (struct square_equation_coefs *equation_coef){
 /// Функция ввода коэффциента c
 void c_coef_input (struct square_equation_coefs *equation_coef){
 
-    assert(equation_coef != NULL);
+    assert(equation_coef != nullptr);
 
     char curr_coef = 'c';
 

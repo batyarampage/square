@@ -1,12 +1,10 @@
-#include <stdio.h>
-#include <TXLib.h>
 #include "struct_of_square_equation.h"
 #include "enumerate.h"
-#include "cin_define.h"
-#include "new_solving_def.h"
-#include "printer_define.h"
+#include "enter_coef.h"
+#include "new_solving.h"
+#include "printer_func.h"
 #include "test_coef.h"
-#include "test_func_def.h"
+#include "testing_func.h"
 #include "const_def.h"
 
 int main (){
@@ -16,13 +14,17 @@ int main (){
     struct square_equation_coefs equation_coef;
     struct roots_square_equation roots_square;
 
-    cin_coef (&equation_coef);
+    cin_coef (&equation_coef);      // get_coefs
 
-    type_of_equation type_of_input_equation = type_of_equation_function (&equation_coef);
+    type_of_equation type_of_input_equation = type_of_equation_function (&equation_coef);// enum с большой
 
-    count_of_roots count_root = count_of_roots_func (&equation_coef, &type_of_input_equation, &roots_square);//solving_equation
+    count_of_roots roots_quantity = count_of_roots_func (&equation_coef, &type_of_input_equation, &roots_square);//solving_equation   enum с большой
 
-    printer (&type_of_input_equation, &roots_square, &count_root);
+                    //roots_quantity
+
+
+
+    printer (&type_of_input_equation, &roots_square, &roots_quantity);
 
     return 0;
 }

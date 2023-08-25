@@ -1,5 +1,14 @@
-#include "printer_define.h"
+#include "printer_func.h"
+#include <stdio.h>
+#include <TXLib.h>
+#include <assert.h>
+
+
 void printer (type_of_equation *type_of_input_equation, struct roots_square_equation *roots_square, count_of_roots *count_of_roots){
+
+    assert(count_of_roots != nullptr);
+    assert(type_of_input_equation != nullptr);
+    assert(roots_square != nullptr);
 
     switch (*count_of_roots){
 
@@ -60,7 +69,6 @@ void printer (type_of_equation *type_of_input_equation, struct roots_square_equa
 
 }
 
-
 void print_infinity_solution (){
 
     printf("Уравнение иммеет бесконечное количество решений");
@@ -68,11 +76,14 @@ void print_infinity_solution (){
 
 void print_linear_equation (struct roots_square_equation *roots_square){
 
-    printf("Уравнение линейное, его решение равно %g", roots_square->x1);
+    assert(roots_square != nullptr);
 
+    printf("Уравнение линейное, его решение равно %g", roots_square->x1);
 }
 
 void print_zero_discriminant (struct roots_square_equation *roots_square){
+
+    assert(roots_square != nullptr);
 
     printf("Дискриминант равен 0, решение единственно, оно равно %g", roots_square->x1);
 
@@ -86,10 +97,14 @@ void print_negative_discriminant (){
 
 void print_linear_equation_zero (struct roots_square_equation *roots_square){
 
+    assert(roots_square != nullptr);
+
     printf("Уравнение линейное, его решение равно %g", roots_square->x1);
 }
 
 void print_positive_discriminant (struct roots_square_equation *roots_square){
+
+    assert(roots_square != nullptr);
 
     printf("Положительный дискриминант, 2 корня\n");
     printf("x1 = %g\n", roots_square->x1);

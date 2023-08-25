@@ -1,18 +1,23 @@
-#include "new_solving_def.h"
-
+#include "new_solving.h"
+#include <assert.h>
+#include <math.h>
 
 void solving_linear_equation (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
+
+    assert(equation_coef != nullptr);
+    assert(roots_square != nullptr);
 
     double b = equation_coef->b;
     double c = equation_coef->c;
     double solution = -c/b;
 
     roots_square->x1 = solution;
-
 }
 
-
 void zero_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
+
+    assert(equation_coef != nullptr);
+    assert(roots_square != nullptr);
 
     double b = equation_coef->b;
     double a = equation_coef->a;
@@ -33,6 +38,10 @@ void zero_discriminant (struct square_equation_coefs *equation_coef, struct root
 }
 
 void positive_discriminant(struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
+
+    assert(equation_coef != nullptr);
+    assert(roots_square != nullptr);
+    assert(discriminant != nullptr);
 
     double a = equation_coef->a;
     double b = equation_coef->b;
@@ -57,11 +66,11 @@ type_of_equation type_of_equation_function (struct square_equation_coefs *equati
 
     if (compare_double_with_zero(a) && compare_double_with_zero(b) && compare_double_with_zero(c)){
 
-        return NOT_A_EQUATION;
+        return NOT_A_EQUATION;//NOT_AN
 
     }
 
-    else if (compare_double_with_zero(a)){
+    else if (compare_double_with_zero(a)){ // переработать if
 
         return LINEAR_EQUATION;
 
@@ -71,8 +80,13 @@ type_of_equation type_of_equation_function (struct square_equation_coefs *equati
 
 }
 
-
-count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef, type_of_equation *type_of_input_equation, struct roots_square_equation *roots_square){
+count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
+                                    enum   type_of_equation const *type_of_input_equation,
+                                    struct roots_square_equation *roots_square){
+// const если передаешь по указателю и не меняешь в функции
+    assert(equation_coef != nullptr);
+    assert(roots_square != nullptr);
+    assert(type_of_input_equation != nullptr);
 
     switch (*type_of_input_equation){
 
@@ -110,7 +124,7 @@ count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
 
             if (compare_double_with_zero(discriminant)){
 
-                zero_discriminant (equation_coef, roots_square);
+                zero_discriminant (equation_coef, roots_square);//rename func
 
                 return ONE_ROOT;
 
@@ -118,7 +132,7 @@ count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
 
             else if (discriminant > 0){
 
-                positive_discriminant (equation_coef, roots_square, &discriminant);
+                positive_discriminant (equation_coef, roots_square, &discriminant);//rename func
                 return TWO_ROOT;
 
             }
@@ -134,17 +148,6 @@ count_of_roots count_of_roots_func (struct square_equation_coefs *equation_coef,
         }
     }
 }
-
-
-/*void solving_linear_equations (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
-
-    double b = equation_coef->b;
-    double c = equation_coef->c;
-
-    double solution = -c/b;
-
-    roots_square->x1 = solution;
-}*/
 
 double Discriminant_calculation (struct square_equation_coefs *equation_coef){
 

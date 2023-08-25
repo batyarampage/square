@@ -1,19 +1,23 @@
 #include <stdio.h>
 #include <TXLib.h>
 #include <math.h>
-#include "enumerate.h"
-#include "new_solving_def.h"
+#include "new_solving.h"
 #include "test_coef.h"
-#include "test_func_def.h"
-#include "new_solving_def.h"
+#include "testing_func.h"
 #include "const_def.h"
-#include "struct_of_square_equation.h"
+#include <assert.h>
+
 
 void testing (struct test_square_coefs all_test[]){
 
-    cin_from_file (all_test);
+    bool ok_test = true;
 
-    for (int i = 0; i < test_count; i++){
+    cin_from_file (all_test, &ok_test);
+
+    int done_tests = 0;
+
+    if (ok_test){ // кодстайл
+    for (int i = 0; i < TEST_COUNT; i++){
 
         struct square_equation_coefs local_coef;// copy from main
         struct roots_square_equation local_roots;
@@ -43,19 +47,37 @@ void testing (struct test_square_coefs all_test[]){
         else{
 
             printf("CORRECT TEST\n");
+            done_tests++;
 
         }
     }
 
-    for (int i = 0; i<test_count-1; i++){
+    printf("Корректно тестов = %d\n", done_tests);
+    printf("Некорректно тестов = %d\n", TEST_COUNT-done_tests);
 
-        getchar ();
+    for (int i = 0; i<TEST_COUNT-1; i++){
+
+        getchar (); // нужно для того, чтобы убрать лишние пробелы
+    }}
+    else{
+
+        printf("файл не существует\n");
+        getchar();
+
     }
 }
 
+
+///Сравнивает два числа - корня уравнения
+
+/*!
+
+    Сравнивает два числа - референсное значение корня и значение полученное из тестов
+
+*/
 bool compare_two_double_in_test (double num1, double num2){
 
-    static double EPS = 1e-2;
+    static double EPS = 1e-3;
 
     if (fabs(num1-num2) < EPS){
 
@@ -65,30 +87,43 @@ bool compare_two_double_in_test (double num1, double num2){
     return true;
 }
 
-void cin_from_file (struct test_square_coefs all_test[]){
+void cin_from_file (struct test_square_coefs all_test[], bool *ok_test){
 
-    FILE *fle = fopen("tests.txt", "r");//сделать проверку на существование файла
 
-    for (int i = 0; i<test_count;i++){
 
-        double a = 0;
-        double b = 0;
-        double c = 0;
-        int count_roots = 0;//roots_quantity
-        double x1ref = 0;
-        double x2ref = 0;
+    FILE *fle = fopen("tests.txt", "r");//сделать проверку на существование файла !
 
-        fscanf(fle, "%lg%lg%lg%d%lg%lg", &a, &b, &c, &count_roots, &x1ref, &x2ref);
+    if (fle == nullptr){
 
-        count_of_roots count_roots1 = count_of_roots (count_roots);
+        printf("Возможно, вы удалили файл с тестовыми условиями, тестов не будет\n");
+        *ok_test = false;
 
-        all_test[i].a = a;
-        all_test[i].b = b;
-        all_test[i].c = c;
-        all_test[i].count_root = count_roots1;
-        all_test[i].x1r = x1ref;
-        all_test[i].x2r = x2ref;
+        while (getchar () != '\n');
 
+    }
+    else {
+
+        for (int i = 0; i<TEST_COUNT;i++){
+
+            double a = 0;
+            double b = 0;
+            double c = 0;
+            int roots_quantity = 0;//roots_quantity
+            double x1ref = 0;
+            double x2ref = 0;
+
+            fscanf(fle, "%lg%lg%lg%d%lg%lg", &a, &b, &c, &roots_quantity, &x1ref, &x2ref);
+
+            count_of_roots count_roots1 = count_of_roots (roots_quantity);
+
+            all_test[i].a = a;
+            all_test[i].b = b;
+            all_test[i].c = c;
+            all_test[i].count_root = count_roots1;
+            all_test[i].x1r = x1ref;
+            all_test[i].x2r = x2ref;
+
+        }
     }
 }
 
@@ -98,6 +133,8 @@ void greeting_user_for_test (){
 
 }
 
+
+/// Функция, для проверки, хочет ли пользователь произвести тесты
 void is_user_wonna_test (){
 
     greeting_user_for_test ();
@@ -108,7 +145,7 @@ void is_user_wonna_test (){
 
     if (aim_user){
 
-        test_square_coefs all_test[test_count] = {{}};
+        test_square_coefs all_test[TEST_COUNT] = {{}};
 
         testing (all_test);
     }
@@ -121,6 +158,9 @@ void is_user_wonna_test (){
 }
 
 void check_user_input (int *parametr, bool *aim_user){
+
+    assert(parametr != nullptr);
+    assert(aim_user != nullptr);
 
     *parametr = getchar ();
 

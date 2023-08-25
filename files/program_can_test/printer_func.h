@@ -1,11 +1,8 @@
-#include <stdio.h>
-#include <TXLib.h>
+#ifndef printer_func
+#define printer_func
 
 #include "struct_of_square_equation.h"
 #include "enumerate.h"
-
-#ifndef printer_define
-#define printer_define
 
 void printer (type_of_equation *type_of_input_equation, struct roots_square_equation *roots_square, count_of_roots *count_of_roots);
 
