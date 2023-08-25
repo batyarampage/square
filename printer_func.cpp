@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <math.h>
 
+
 void printer (Type_of_equation const *type_of_input_equation, struct roots_square_equation const *roots_square, Count_of_roots const *count_of_roots){
 
     assert(count_of_roots != nullptr);
