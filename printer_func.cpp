@@ -67,7 +67,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
 
 void print_infinity_solution (){
 
-    printf("РЈСЂР°РІРЅРµРЅРёРµ РёРјРјРµРµС‚ Р±РµСЃРєРѕРЅРµС‡РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµС€РµРЅРёР№");
+    printf("Уравнение иммеет бесконечное количество решений");
 }
 
 void print_linear_equation (struct roots_square_equation const *roots_square){
@@ -80,12 +80,12 @@ void print_linear_equation (struct roots_square_equation const *roots_square){
 
     if (fabs(x1) < epsilon){
 
-        printf("РЈСЂР°РІРЅРµРЅРёРµ Р»РёРЅРµР№РЅРѕРµ, РµРіРѕ СЂРµС€РµРЅРёРµ СЂР°РІРЅРѕ 0");
+        printf("Уравнение линейное, его решение равно 0");
     }
 
     else {
 
-        printf("РЈСЂР°РІРЅРµРЅРёРµ Р»РёРЅРµР№РЅРѕРµ, РµРіРѕ СЂРµС€РµРЅРёРµ СЂР°РІРЅРѕ %g", roots_square->x1);
+        printf("Уравнение линейное, его решение равно %g", roots_square->x1);
     }
 }
 
@@ -99,12 +99,12 @@ void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
     if (fabs(x1) < epsilon){
 
-        printf("Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ СЂР°РІРµРЅ 0, СЂРµС€РµРЅРёРµ РµРґРёРЅСЃС‚РІРµРЅРЅРѕ, РѕРЅРѕ СЂР°РІРЅРѕ 0");
+        printf("Дискриминант равен 0, решение единственно, оно равно 0");
     }
 
     else {
 
-        printf("Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ СЂР°РІРµРЅ 0, СЂРµС€РµРЅРёРµ РµРґРёРЅСЃС‚РІРµРЅРЅРѕ, РѕРЅРѕ СЂР°РІРЅРѕ %g", x1);
+        printf("Дискриминант равен 0, решение единственно, оно равно %g", x1);
     }
 
 
@@ -113,20 +113,20 @@ void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
 void print_negative_discriminant (){
 
-    printf("Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ РјРµРЅСЊС€Рµ 0, РєРѕСЂРЅРµР№ РЅРµС‚");
+    printf("Дискриминант меньше 0, корней нет");
 
 }
 
 void print_linear_equation_zero (){
 
-    printf("РЈ СѓСЂР°РІРЅРµРЅРёСЏ РЅРµС‚ СЂРµС€РµРЅРёР№");
+    printf("У уравнения нет решений");
 }
 
 void print_positive_discriminant (struct roots_square_equation const *roots_square){
 
     assert(roots_square != nullptr);
 
-    printf("РџРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Р№ РґРёСЃРєСЂРёРјРёРЅР°РЅС‚, 2 РєРѕСЂРЅСЏ\n");
+    printf("Положительный дискриминант, 2 корня\n");
     printf("x1 = %g\n", roots_square->x1);
     printf("x2 = %g\n", roots_square->x2);
 }

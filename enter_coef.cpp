@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <TXLib.h>
 #include <assert.h>
+
+///Макрос предназначенный для упрощения вызова функции ввода коэффициентов квадратного уравнения
 #define COEF_CORRECT_INPUT(coef_symbol) get_correct_input(&(equation_coef->coef_symbol), #coef_symbol)
 
 void get_coefs (struct square_equation_coefs *equation_coef){
