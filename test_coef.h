@@ -1,5 +1,6 @@
  #ifndef test_coef
  #define test_coef
+
 /// Структура, предназначенная для ввода тестирующих коэффициентов из файла
 struct test_square_coefs{
 

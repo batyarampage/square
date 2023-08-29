@@ -5,7 +5,6 @@
 #include "test_coef.h"
 #include "testing_func.h"
 #include "const_def.h"
-#include <assert.h>
 
 
 void testing (struct test_square_coefs all_test[]){
@@ -38,10 +37,12 @@ void testing (struct test_square_coefs all_test[]){
             double local_rootx1 = local_roots.x1;
             double local_rootx2 = local_roots.x2;
 
+            if ((count_of_roots_ref != count_root1) ||
+                (compare_two_double_in_test (x1ref, local_rootx1)) ||
+                (compare_two_double_in_test (x2ref, local_rootx2))){
 
-            if ((count_of_roots_ref != count_root1) || (compare_two_double_in_test (x1ref, local_rootx1)) || (compare_two_double_in_test (x2ref, local_rootx2))){
-
-                printf("\033[31m NOT PASSED TEST %d, x1ref = %g, x1 = %g, x2ref = %g, x2 = %g, количество корней ожидаемое = %d, реальное количество корней = %d\n \033[0m", i+1, x1ref, local_roots.x1,x2ref,local_roots.x2, count_of_roots_ref, count_root1);
+                printf("\033[31m NOT PASSED TEST %d, x1ref = %g, x1 = %g, x2ref = %g, x2 = %g, РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№ РѕР¶РёРґР°РµРјРѕРµ = %d, СЂРµР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂРЅРµР№ = %d\n \033[0m",
+                        i+1, x1ref, local_roots.x1,x2ref,local_roots.x2, count_of_roots_ref, count_root1);
 
             }
 
@@ -53,19 +54,16 @@ void testing (struct test_square_coefs all_test[]){
             }
         }
 
-        printf("\033[3;35m Корректно тестов = %d\n \033[0m", done_tests);
-        printf("\033[3;35m Некорректно тестов = %d \033[0m", TEST_COUNT-done_tests);
+        printf("\033[3;35m РљРѕСЂСЂРµРєС‚РЅРѕ С‚РµСЃС‚РѕРІ = %d\n \033[0m", done_tests);
+        printf("\033[3;35m РќРµРєРѕСЂСЂРµРєС‚РЅРѕ С‚РµСЃС‚РѕРІ = %d \033[0m", TEST_COUNT-done_tests);
         printf("\n");
-
-        for (int i = 0; i<TEST_COUNT-1; i++){
-
-            getchar (); // нужно для того, чтобы убрать лишние пробелы
-        }
+        getchar();// Р’С‹С€Рµ СЃРґРµР»Р°РЅ РїРµСЂРµРІРѕРґ СЃС‚СЂРѕРєРё, С‡С‚РѕР±С‹ С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РЅРµ СЃС‡РёС‚Р°Р»Р° СЌС‚РѕС‚ РїСЂРѕР±РµР», СЏ СЃСЂР°Р·Сѓ Р¶Рµ С‡РёС‚Р°СЋ РµРіРѕ
+                  // РёР· РїРѕС‚РѕРєР° РІРІРѕРґР°
     }
 
     else{
 
-        printf("файл не существует\n");
+        printf("С„Р°Р№Р» РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚\n");
         getchar();
     }
 }
@@ -86,11 +84,11 @@ void read_from_file (struct test_square_coefs all_test[], bool *ok_test){
 
 
 
-    FILE *fle = fopen("tests.txt", "r");//сделать проверку на существование файла !
+    FILE *fle = fopen("tests.txt", "r");
 
     if (fle == nullptr){
 
-        printf("Возможно, вы удалили файл с тестовыми условиями, тестов не будет\n");
+        printf("Р’РѕР·РјРѕР¶РЅРѕ, РІС‹ СѓРґР°Р»РёР»Рё С„Р°Р№Р» СЃ С‚РµСЃС‚РѕРІС‹РјРё СѓСЃР»РѕРІРёСЏРјРё, С‚РµСЃС‚РѕРІ РЅРµ Р±СѓРґРµС‚\n");
         *ok_test = false;
 
         while (getchar () != '\n');
@@ -123,15 +121,14 @@ void read_from_file (struct test_square_coefs all_test[], bool *ok_test){
 
 void greeting_user_for_test (){
 
-    printf("Если хотите прогнать unit-тесты, то введите букву t, иначе любое другое число или букву\n");
-
+    printf("Р•СЃР»Рё С…РѕС‚РёС‚Рµ РїСЂРѕРіРЅР°С‚СЊ unit-С‚РµСЃС‚С‹, С‚Рѕ РІРІРµРґРёС‚Рµ Р±СѓРєРІСѓ t, РёРЅР°С‡Рµ Р»СЋР±РѕРµ РґСЂСѓРіРѕРµ С‡РёСЃР»Рѕ РёР»Рё Р±СѓРєРІСѓ\n");
 }
 
 void is_user_wonna_test (){
 
     greeting_user_for_test ();
 
-    int parametr = 0; // вводимое число
+    int parametr = 0;
     bool aim_user = false;
     check_user_input (&parametr, &aim_user);
 

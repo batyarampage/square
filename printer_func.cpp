@@ -1,7 +1,6 @@
 #include "printer_func.h"
 #include <stdio.h>
 #include <TXLib.h>
-#include <assert.h>
 #include <math.h>
 
 
@@ -16,6 +15,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
         case INFINITI:{
 
             print_infinity_solution ();
+
             break;
         }
 
@@ -24,6 +24,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
             if (*type_of_input_equation == LINEAR_EQUATION){
 
                 print_linear_equation (roots_square);
+
                 break;
             }
 
@@ -32,7 +33,6 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
                 print_zero_discriminant (roots_square);
                 break;
             }
-
         }
 
         case NO_ROOTS:{
@@ -40,15 +40,16 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
             if (*type_of_input_equation == QUADRATIC_EQUATION){
 
                 print_negative_discriminant ();
+
                 break;
             }
 
             else{
 
                 print_linear_equation_zero ();
+
                 break;
             }
-
         }
 
         case TWO_ROOT:{
@@ -60,9 +61,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
             break;
 
         }
-
     }
-
 }
 
 void print_infinity_solution (){
@@ -106,15 +105,11 @@ void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
         printf("Дискриминант равен 0, решение единственно, оно равно %g", x1);
     }
-
-
-
 }
 
 void print_negative_discriminant (){
 
     printf("Дискриминант меньше 0, корней нет");
-
 }
 
 void print_linear_equation_zero (){

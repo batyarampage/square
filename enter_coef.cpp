@@ -1,7 +1,6 @@
 #include "enter_coef.h"
 #include <stdio.h>
 #include <TXLib.h>
-#include <assert.h>
 
 ///Макрос предназначенный для упрощения вызова функции ввода коэффициентов квадратного уравнения
 #define COEF_CORRECT_INPUT(coef_symbol) get_correct_input(&(equation_coef->coef_symbol), #coef_symbol)
@@ -17,7 +16,6 @@ void get_coefs (struct square_equation_coefs *equation_coef){
     COEF_CORRECT_INPUT(a);
     COEF_CORRECT_INPUT(b);
     COEF_CORRECT_INPUT(c);
-
 }
 
 void check_readiness_to_enter_coef (int *ch){
@@ -65,7 +63,6 @@ void get_correct_input (double *inputParam, const char * curr_input_param){
         while (getchar () != '\n');
 
         print_enter_coef (curr_input_param);
-
     }
 }
 
@@ -78,5 +75,4 @@ void greetings_user (){
 
     printf("Привет, эта программа решает квадратное уравнение, После каждого коэффициента вводите пробел\n");
     printf("Когда будете готовы вводить коэффициеты, нажмите Enter");
-
 }
