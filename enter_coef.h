@@ -11,14 +11,14 @@
 
     \param equation_coef - указатель на структуру с коэффициентами квадратного уравнения
 */
-void get_coefs (struct square_equation_coefs *equation_coef);
+bool get_coefs (struct square_equation_coefs *equation_coef);
 
 
 /// Функция, которая контролирует нажатие ENTER, для перехода к вводу коэффциентов
 /*!
     \param ch - указатель, для контроля ввода пробела
 */
-void check_readiness_to_enter_coef ();
+bool check_readiness_to_enter_coef ();
 
 
 /// Функция, которая проверяет корректность ввода коэффицентов квадратного уравнения
@@ -28,7 +28,7 @@ void check_readiness_to_enter_coef ();
     \param curr_input_param - текущий вводимый коэффициент (a, b, c)
 
 */
-void get_correct_input (double *inputParam, const char * curr_input_param);
+bool get_correct_input (double *inputParam, const char * curr_input_param);
 
 
 ///Функция, которая показывает пользователю, какой коэффиент вводить

@@ -1,52 +1,81 @@
 #include "enter_coef.h"
 #include <stdio.h>
 #include <TXLib.h>
+#include "func_tools.h"
 
 ///Макрос предназначенный для упрощения вызова функции ввода коэффициентов квадратного уравнения
 #define COEF_CORRECT_INPUT(coef_symbol) get_correct_input(&(equation_coef->coef_symbol), #coef_symbol)
 
-void get_coefs (struct square_equation_coefs *equation_coef){
+bool get_coefs (struct square_equation_coefs *equation_coef){
 
     assert(equation_coef != nullptr);
 
     greetings_user ();
 
+    if ((check_readiness_to_enter_coef ()) && (COEF_CORRECT_INPUT(a)) && (COEF_CORRECT_INPUT(b)) && (COEF_CORRECT_INPUT(c))){
 
-    check_readiness_to_enter_coef ();
-    COEF_CORRECT_INPUT(a);
-    COEF_CORRECT_INPUT(b);
-    COEF_CORRECT_INPUT(c);
+        return true;
+    }
+    return false;
 }
 
-void check_readiness_to_enter_coef (){
+bool check_readiness_to_enter_coef (){
 
     int ch = 0;
     ch = getchar ();
 
     while (ch != '\n'){
 
-        while (getchar() != '\n');  // copypaste, into func
+        if (ch == EOF){
+
+            return false;
+        }
+
+        cleaner_stdio ();
         printf("некорректный ввод, попробуйте еще раз ввести пробел\n");
         ch = getchar ();
     }
+
+    return true;
 }
 
-void get_correct_input (double *inputParam, const char *curr_input_param){
+bool get_correct_input (double *inputParam, const char *curr_input_param){
 
     assert(inputParam != nullptr);
 
     ask_enter_coef (curr_input_param);
 
-    int symbol = 0;
+    int symbol = getchar ();
 
-    symbol = getchar ();
+    /*do{
 
-    while (true){   // asks to enter coefficient again if '\n' was entered, while (symbol != EOF)
+        symbol = getchar ();
 
         if (symbol == '\n'){
 
             printf("Некоректный ввод, повторите еще раз\n");
+
             ask_enter_coef (curr_input_param);
+
+        }
+
+        else if (symbol == EOF){
+
+            ungetc (symbol, stdin);
+            break;
+        }
+
+    }
+    while (symbol != EOF)*/
+
+    while (symbol != EOF){
+
+        if (symbol == '\n'){
+
+            printf("Некоректный ввод, повторите еще раз\n");
+
+            ask_enter_coef (curr_input_param);
+
             symbol = getchar ();
         }
 
@@ -57,16 +86,27 @@ void get_correct_input (double *inputParam, const char *curr_input_param){
         }
     }
 
-    while ((!scanf("%lg", inputParam)) || (getchar () != '\n')){//проверка на EOF
+    if (symbol == EOF){
 
+        return false;
+    }
+
+    while ((!scanf("%lg", inputParam)) || (symbol = getchar () != '\n')){
+
+        if (symbol == EOF){
+
+            return false;
+        }
         printf("Некоректный ввод, повторите еще раз\n");
-        while (getchar () != '\n');
+
+        cleaner_stdio ();
 
         ask_enter_coef (curr_input_param);
     }
+    return true;
 }
 
-void ask_enter_coef (const char *coef){  // fix prototype
+void ask_enter_coef (const char *coef){
 
     printf("Введите коэффициент %c = ", *coef);
 }

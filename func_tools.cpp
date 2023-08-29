@@ -11,3 +11,9 @@ bool compare_double_with_zero (double param){
 
     return false;
 }
+
+void cleaner_stdio (){
+
+    while (getchar () != '\n');
+
+}

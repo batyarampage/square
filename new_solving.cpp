@@ -3,7 +3,7 @@
 #include <math.h>
 #include "func_tools.h"
 
-void solving_linear_equation (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
+void solving_linear_equation (const struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
     assert(roots_square  != nullptr);
@@ -15,7 +15,7 @@ void solving_linear_equation (struct square_equation_coefs *equation_coef, struc
     roots_square->x1 = solution;
 }
 
-void solve_equation_with_zero_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
+void solve_equation_with_zero_discriminant (const struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
     assert(roots_square  != nullptr);
@@ -37,7 +37,7 @@ void solve_equation_with_zero_discriminant (struct square_equation_coefs *equati
     }
 }
 
-void solve_equation_with_positive_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
+void solve_equation_with_positive_discriminant (const struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
 
     assert(equation_coef != nullptr);
     assert(roots_square  != nullptr);
@@ -55,7 +55,7 @@ void solve_equation_with_positive_discriminant (struct square_equation_coefs *eq
     roots_square->x2 = x2;
 }
 
-Type_of_equation type_of_equation_function (struct square_equation_coefs *equation_coef){
+Type_of_equation type_of_equation_function (const struct square_equation_coefs *equation_coef){
 
     assert(equation_coef != nullptr);
 
@@ -76,7 +76,7 @@ Type_of_equation type_of_equation_function (struct square_equation_coefs *equati
     return QUADRATIC_EQUATION;
 }
 
-Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, enum Type_of_equation type_of_input_equation, struct roots_square_equation *roots_square){
+Count_of_roots solving_equation (const struct square_equation_coefs *equation_coef, enum Type_of_equation type_of_input_equation, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
     assert(roots_square  != nullptr);
@@ -135,7 +135,7 @@ Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, en
     }
 }
 
-double Discriminant_calculation (struct square_equation_coefs *equation_coef){
+double Discriminant_calculation (const struct square_equation_coefs *equation_coef){
 
     assert(equation_coef != nullptr);
 

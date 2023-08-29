@@ -8,6 +8,7 @@
 #include "const_def.h"
 
 
+
 //! @mainpage
 //! Привет! Моя программа решает квадратное уравнение.
 //! Инструкция, если не хочется ничего компилировать самому:
@@ -35,13 +36,19 @@ int main (){
     struct square_equation_coefs equation_coef;
     struct roots_square_equation roots_square;
 
-    get_coefs (&equation_coef);
+    if (get_coefs (&equation_coef)){
 
-    Type_of_equation type_of_input_equation = type_of_equation_function (&equation_coef);
+        Type_of_equation type_of_input_equation = type_of_equation_function (&equation_coef);
 
-    Count_of_roots roots_quantity = solving_equation (&equation_coef, type_of_input_equation, &roots_square);//убрать указатели на type_of_input_equation
+        Count_of_roots roots_quantity = solving_equation (&equation_coef, type_of_input_equation, &roots_square);
 
-    printer (type_of_input_equation, &roots_square, &roots_quantity);//убрать указатели на type_of_input_equation
+        printer (type_of_input_equation, &roots_square, roots_quantity);
+    }
+
+    else {
+
+        print_eof_in_stdio ();
+    }
 
     return 0;
 }

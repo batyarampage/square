@@ -11,7 +11,6 @@ const char* WHITE = "\033[0m";
 const char* GREEN = "\033[32m";
 const char* PURPLE = "\033[3;35m";
 
-// ASSERTS ALL FILE!
 void testing (struct test_square_coefs all_test[]){
 
     assert(all_test != nullptr);
@@ -144,8 +143,7 @@ void is_user_wanna_test (){
 
     else{
 
-        while (getchar () != '\n');
-
+        printf("Тестов не будет по причине EOF\n");
     }
 }
 

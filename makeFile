@@ -13,6 +13,8 @@ $(APP): $(OBJ)
 %.o: %.cpp
 	@$(CXX) $(CXXFLAGS) $< -c -o $@
 
+.PHONY : clean, run
+
 clean:
 	rm *.o
 run:
