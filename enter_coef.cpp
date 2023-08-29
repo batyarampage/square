@@ -9,44 +9,44 @@ void get_coefs (struct square_equation_coefs *equation_coef){
 
     assert(equation_coef != nullptr);
 
-    int ch = 0;
-
     greetings_user ();
-    check_readiness_to_enter_coef (&ch);
+
+
+    check_readiness_to_enter_coef ();
     COEF_CORRECT_INPUT(a);
     COEF_CORRECT_INPUT(b);
     COEF_CORRECT_INPUT(c);
 }
 
-void check_readiness_to_enter_coef (int *ch){
+void check_readiness_to_enter_coef (){
 
-    assert (ch != nullptr);
-    *ch = getchar ();
+    int ch = 0;
+    ch = getchar ();
 
-    while (!(*ch == '\n')){
+    while (ch != '\n'){
 
-        while (getchar() != '\n');
+        while (getchar() != '\n');  // copypaste, into func
         printf("некорректный ввод, попробуйте еще раз ввести пробел\n");
-        *ch = getchar ();
+        ch = getchar ();
     }
 }
 
-void get_correct_input (double *inputParam, const char * curr_input_param){
+void get_correct_input (double *inputParam, const char *curr_input_param){
 
     assert(inputParam != nullptr);
 
-    print_enter_coef (curr_input_param);
+    ask_enter_coef (curr_input_param);
 
     int symbol = 0;
 
     symbol = getchar ();
 
-    while (true){
+    while (true){   // asks to enter coefficient again if '\n' was entered, while (symbol != EOF)
 
         if (symbol == '\n'){
 
             printf("Некоректный ввод, повторите еще раз\n");
-            print_enter_coef (curr_input_param);
+            ask_enter_coef (curr_input_param);
             symbol = getchar ();
         }
 
@@ -57,16 +57,16 @@ void get_correct_input (double *inputParam, const char * curr_input_param){
         }
     }
 
-    while ((!scanf("%lg", inputParam)) || (getchar () != '\n')){
+    while ((!scanf("%lg", inputParam)) || (getchar () != '\n')){//проверка на EOF
 
         printf("Некоректный ввод, повторите еще раз\n");
         while (getchar () != '\n');
 
-        print_enter_coef (curr_input_param);
+        ask_enter_coef (curr_input_param);
     }
 }
 
-void print_enter_coef (const char * coef){
+void ask_enter_coef (const char *coef){  // fix prototype
 
     printf("Введите коэффициент %c = ", *coef);
 }

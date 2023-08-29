@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <TXLib.h>
 #include <math.h>
+#include <func_tools.h>
 
 
-void printer (Type_of_equation const *type_of_input_equation, struct roots_square_equation const *roots_square, Count_of_roots const *count_of_roots){
+void printer (Type_of_equation type_of_input_equation, struct roots_square_equation const *roots_square, Count_of_roots const *count_of_roots){
 
     assert(count_of_roots != nullptr);
-    assert(type_of_input_equation != nullptr);
-    assert(roots_square != nullptr);
+    assert(roots_square   != nullptr);
 
     switch (*count_of_roots){
 
-        case INFINITI:{
+        case INFINITE_NUMBER_OF_ROOTS:{
 
             print_infinity_solution ();
 
@@ -21,7 +21,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
 
         case ONE_ROOT:{
 
-            if (*type_of_input_equation == LINEAR_EQUATION){
+            if (type_of_input_equation == LINEAR_EQUATION){
 
                 print_linear_equation (roots_square);
 
@@ -37,7 +37,7 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
 
         case NO_ROOTS:{
 
-            if (*type_of_input_equation == QUADRATIC_EQUATION){
+            if (type_of_input_equation == QUADRATIC_EQUATION){
 
                 print_negative_discriminant ();
 
@@ -52,21 +52,26 @@ void printer (Type_of_equation const *type_of_input_equation, struct roots_squar
             }
         }
 
-        case TWO_ROOT:{
+        case TWO_ROOTS:{
 
             print_positive_discriminant (roots_square);
         }
 
-        default:{
-            break;
+        case FAULT:{
 
+            break;
+        }
+
+        default:{
+
+            break;
         }
     }
 }
 
 void print_infinity_solution (){
 
-    printf("Уравнение иммеет бесконечное количество решений");
+    printf("Уравнение имеет бесконечное количество решений\n");
 }
 
 void print_linear_equation (struct roots_square_equation const *roots_square){
@@ -79,32 +84,26 @@ void print_linear_equation (struct roots_square_equation const *roots_square){
 
     if (fabs(x1) < epsilon){
 
-        printf("Уравнение линейное, его решение равно 0");
+        x1 = 0;
     }
 
-    else {
-
-        printf("Уравнение линейное, его решение равно %g", roots_square->x1);
-    }
+    printf("Уравнение линейное, его решение равно %g", x1);
 }
 
 void print_zero_discriminant (struct roots_square_equation const *roots_square){
 
     assert(roots_square != nullptr);
 
-    static double epsilon = 1e-10;
+
 
     double x1 = roots_square->x1;
 
-    if (fabs(x1) < epsilon){
+    if (compare_double_with_zero(x1)){
 
-        printf("Дискриминант равен 0, решение единственно, оно равно 0");
+        x1 = 0;
     }
 
-    else {
-
-        printf("Дискриминант равен 0, решение единственно, оно равно %g", x1);
-    }
+    printf("Дискриминант равен 0, решение единственно, оно равно %g", x1);
 }
 
 void print_negative_discriminant (){

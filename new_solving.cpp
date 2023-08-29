@@ -1,11 +1,12 @@
 #include "new_solving.h"
 #include <assert.h>
 #include <math.h>
+#include "func_tools.h"
 
 void solving_linear_equation (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
-    assert(roots_square != nullptr);
+    assert(roots_square  != nullptr);
 
     double b = equation_coef->b;
     double c = equation_coef->c;
@@ -17,7 +18,7 @@ void solving_linear_equation (struct square_equation_coefs *equation_coef, struc
 void solve_equation_with_zero_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
-    assert(roots_square != nullptr);
+    assert(roots_square  != nullptr);
 
     double b = equation_coef->b;
     double a = equation_coef->a;
@@ -39,8 +40,8 @@ void solve_equation_with_zero_discriminant (struct square_equation_coefs *equati
 void solve_equation_with_positive_discriminant (struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
 
     assert(equation_coef != nullptr);
-    assert(roots_square != nullptr);
-    assert(discriminant != nullptr);
+    assert(roots_square  != nullptr);
+    assert(discriminant  != nullptr);
 
     double a = equation_coef->a;
     double b = equation_coef->b;
@@ -75,17 +76,16 @@ Type_of_equation type_of_equation_function (struct square_equation_coefs *equati
     return QUADRATIC_EQUATION;
 }
 
-Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, enum Type_of_equation const *type_of_input_equation, struct roots_square_equation *roots_square){
+Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, enum Type_of_equation type_of_input_equation, struct roots_square_equation *roots_square){
 
     assert(equation_coef != nullptr);
-    assert(roots_square != nullptr);
-    assert(type_of_input_equation != nullptr);
+    assert(roots_square  != nullptr);
 
-    switch (*type_of_input_equation){
+    switch (type_of_input_equation){
 
         case NOT_A_EQUATION:{
 
-            return INFINITI;
+            return INFINITE_NUMBER_OF_ROOTS;
         }
 
         case LINEAR_EQUATION:{
@@ -95,7 +95,6 @@ Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, en
             if (compare_double_with_zero(b)){
 
                 return NO_ROOTS;
-
             }
 
             else{
@@ -103,9 +102,7 @@ Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, en
                 solving_linear_equation (equation_coef, roots_square);
 
                 return ONE_ROOT;
-
             }
-
         }
 
         case QUADRATIC_EQUATION:{
@@ -116,17 +113,16 @@ Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, en
 
             if (compare_double_with_zero(discriminant)){
 
-                solve_equation_with_zero_discriminant (equation_coef, roots_square);//rename func
+                solve_equation_with_zero_discriminant (equation_coef, roots_square);
 
                 return ONE_ROOT;
 
             }
 
-            else if (discriminant > 0){
+            else if (positive_comparator_discriminant(discriminant)){
 
-                solve_equation_with_positive_discriminant (equation_coef, roots_square, &discriminant);//rename func
-                return TWO_ROOT;
-
+                solve_equation_with_positive_discriminant (equation_coef, roots_square, &discriminant);
+                return TWO_ROOTS;
             }
 
             return NO_ROOTS;
@@ -134,7 +130,7 @@ Count_of_roots solving_equation (struct square_equation_coefs *equation_coef, en
 
         default:{
 
-            return NO_ROOTS;
+            return FAULT;
         }
     }
 }
@@ -150,11 +146,12 @@ double Discriminant_calculation (struct square_equation_coefs *equation_coef){
     return b*b-4*a*c;
 }
 
-bool compare_double_with_zero (double param){
+
+bool positive_comparator_discriminant (double parametr){
 
     static double EPSILON = 1e-10;
 
-    if (fabs(param) < EPSILON){
+    if (parametr > EPSILON){
 
         return true;
     }

@@ -14,7 +14,7 @@ struct test_square_coefs{
     double c = 0;
 
     ///Референсное количество корней
-    Count_of_roots count_root = INFINITI;
+    Count_of_roots count_root = INFINITE_NUMBER_OF_ROOTS;
 
     ///Референсное значение первого корня
     double x1r = 0;
