@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <TXLib.h>
 #include <math.h>
-#include <func_tools.h>
+#include "func_tools.h"
 
 
 void printer (Type_of_equation type_of_input_equation, struct roots_square_equation const *roots_square, Count_of_roots const *count_of_roots){
