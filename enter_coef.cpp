@@ -47,27 +47,6 @@ bool get_correct_input (double *inputParam, const char *curr_input_param){
 
     int symbol = getchar ();
 
-    /*do{
-
-        symbol = getchar ();
-
-        if (symbol == '\n'){
-
-            printf("Некоректный ввод, повторите еще раз\n");
-
-            ask_enter_coef (curr_input_param);
-
-        }
-
-        else if (symbol == EOF){
-
-            ungetc (symbol, stdin);
-            break;
-        }
-
-    }
-    while (symbol != EOF)*/
-
     while (symbol != EOF){
 
         if (symbol == '\n'){
@@ -85,6 +64,8 @@ bool get_correct_input (double *inputParam, const char *curr_input_param){
             break;
         }
     }
+
+
 
     if (symbol == EOF){
 
@@ -115,4 +96,6 @@ void greetings_user (){
 
     printf("Привет, эта программа решает квадратное уравнение, После каждого коэффициента вводите пробел\n");
     printf("Когда будете готовы вводить коэффициеты, нажмите Enter");
+
+    while (getchar() == EOF);
 }

@@ -83,7 +83,7 @@ Count_of_roots solving_equation (const struct square_equation_coefs *equation_co
 
     switch (type_of_input_equation){
 
-        case NOT_A_EQUATION:{
+        case NOT_A_EQUATION:{//пробел
 
             return INFINITE_NUMBER_OF_ROOTS;
         }
@@ -119,9 +119,10 @@ Count_of_roots solving_equation (const struct square_equation_coefs *equation_co
 
             }
 
-            else if (positive_comparator_discriminant(discriminant)){
+            if (positive_comparator_discriminant(discriminant)){
 
                 solve_equation_with_positive_discriminant (equation_coef, roots_square, &discriminant);
+
                 return TWO_ROOTS;
             }
 
@@ -149,7 +150,7 @@ double Discriminant_calculation (const struct square_equation_coefs *equation_co
 
 bool positive_comparator_discriminant (double parametr){
 
-    static double EPSILON = 1e-10;
+    const double EPSILON = 1e-10;
 
     if (parametr > EPSILON){
 

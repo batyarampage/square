@@ -30,6 +30,7 @@ void printer (Type_of_equation type_of_input_equation, const struct roots_square
             else{
 
                 print_zero_discriminant (roots_square);
+
                 break;
             }
         }
@@ -54,6 +55,8 @@ void printer (Type_of_equation type_of_input_equation, const struct roots_square
         case TWO_ROOTS:{
 
             print_positive_discriminant (roots_square);
+
+            break;
         }
 
         case FAULT:{
@@ -81,7 +84,7 @@ void print_linear_equation (const struct roots_square_equation *roots_square){
 
     double x1 = roots_square->x1;
 
-    if (fabs(x1) < epsilon){
+    if (fabs(x1) < epsilon){//in fucntion
 
         x1 = 0;
     }

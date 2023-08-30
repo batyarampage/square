@@ -5,6 +5,7 @@
 #include "test_coef.h"
 #include "testing_func.h"
 #include "const_def.h"
+#include "func_tools.h"
 
 const char* RED = "\033[31m";
 const char* WHITE = "\033[0m";
@@ -52,7 +53,7 @@ void testing (struct test_square_coefs all_test[]){
 
             }
 
-            else{
+            else {
 
                 printf("%s CORRECT TEST %s\n", GREEN, WHITE);
                 done_tests++;
@@ -62,14 +63,13 @@ void testing (struct test_square_coefs all_test[]){
         printf("%s Корректно тестов = %d %s\n ", PURPLE,done_tests, WHITE);
         printf("%s Некорректно тестов = %d %s \n", PURPLE, TEST_COUNT-done_tests, WHITE);
         printf("\n");
-        getchar();// Выше сделан перевод строки, чтобы функция проверки ввода не считала этот пробел, я сразу же читаю его
+        //Выше сделан перевод строки, чтобы функция проверки ввода не считала этот пробел, я сразу же читаю его
                   // из потока ввода
     }
 
     else{
 
         printf("файл не существует\n");
-        getchar();
     }
 }
 
@@ -94,8 +94,7 @@ void read_from_file (struct test_square_coefs all_test[], bool *ok_test){
         printf("Возможно, вы удалили файл с тестовыми условиями, тестов не будет\n");
         *ok_test = false;
 
-        while (getchar () != '\n');
-        fclose(fle);
+        cleaner_stdio ();
 
     }
     else {
@@ -143,7 +142,7 @@ void is_user_wanna_test (){
 
     else{
 
-        printf("Тестов не будет по причине EOF\n");
+        printf("Вы не захотели тесты, их не будет\n");
     }
 }
 

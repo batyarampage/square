@@ -8,7 +8,7 @@ APP = square_solver.exe
 all: $(APP)
 
 $(APP): $(OBJ)
-	$(CXX) $(CXXFLAGS) $^ -o $@ 
+	@$(CXX) $(CXXFLAGS) $^ -o $@ 
 
 %.o: %.cpp
 	@$(CXX) $(CXXFLAGS) $< -c -o $@
