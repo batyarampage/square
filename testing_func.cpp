@@ -72,9 +72,16 @@ void testing (){
 
         fclose(fle);
 
-        printf("%s Корректно тестов = %d %s\n ", PURPLE,done_tests, WHITE);
-        printf("%s Некорректно тестов = %d %s \n", PURPLE, count_of_all_tests-done_tests, WHITE);
-        printf("\n");
+        if (count_of_all_tests == 0){
+
+            printf("В файле с тестами нет тестов\n");
+        }
+
+        else{
+            printf("%s Корректно тестов = %d %s\n ", PURPLE,done_tests, WHITE);
+            printf("%s Некорректно тестов = %d %s \n", PURPLE, count_of_all_tests-done_tests, WHITE);
+            printf("\n");
+        }
     }
 }
 

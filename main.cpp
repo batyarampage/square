@@ -21,8 +21,8 @@
 //!     3. Перейти в директорий с клоном репозитория с помощью cd
 //!            > Например: cd D:\cdblockscpp\square
 //!      4. Скомпилировать файл
-//!         > Например: .\g+++ .\main.cpp .\printer_func.cpp .\testing_func.cpp .\new_solving.cpp .\enter_coef.cpp .\func_tools.cpp -o square_solver.exe
-//!         > > Примечание: файл "g+++" содержит флаги компиляции
+//!         Например: .\g+++ .\main.cpp .\printer_func.cpp .\testing_func.cpp .\new_solving.cpp .\enter_coef.cpp .\func_tools.cpp -o square_solver.exe \n
+//!         Примечание: файл "g+++" содержит флаги компиляции
 //!     5. В директории клона репозитория появится исполняемый .exe файл, запускаем его и радуемся!
 //! \author batyaRampage
 //! \version 1.0
