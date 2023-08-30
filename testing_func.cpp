@@ -7,11 +7,11 @@
 #include "const_def.h"
 #include "func_tools.h"
 
-const char* RED = "\033[31m";
-const char* WHITE = "\033[0m";
-const char* GREEN = "\033[32m";
-const char* PURPLE = "\033[3;35m";
-const int FSCANF_COUNT_FROM_FILE = 6;
+static const char* RED = "\033[31m";
+static const char* WHITE = "\033[0m";
+static const char* GREEN = "\033[32m";
+static const char* PURPLE = "\033[3;35m";
+static const int FSCANF_COUNT_FROM_FILE = 6;
 
 void testing (){
 
