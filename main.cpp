@@ -5,9 +5,6 @@
 #include "printer_func.h"
 #include "test_coef.h"
 #include "testing_func.h"
-#include "const_def.h"
-
-
 
 //! @mainpage
 //! Привет! Моя программа решает квадратное уравнение.
@@ -29,12 +26,12 @@
 //! \date 25.08.2023
 
 
-int main (){
+int main (void){
 
     is_user_wanna_test ();
 
-    struct square_equation_coefs equation_coef;
-    struct roots_square_equation roots_square;
+    struct square_equation_coefs equation_coef = {};
+    struct roots_square_equation roots_square  = {};
 
     if (get_coefs (&equation_coef)){
 

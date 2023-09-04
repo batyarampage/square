@@ -18,7 +18,7 @@ void printer (Type_of_equation type_of_input_equation, const struct roots_square
             break;
         }
 
-        case ONE_ROOT:{
+        case ONE_ROOT: {
 
             if (type_of_input_equation == LINEAR_EQUATION){
 
@@ -44,7 +44,7 @@ void printer (Type_of_equation type_of_input_equation, const struct roots_square
                 break;
             }
 
-            else{
+            else {
 
                 print_linear_equation_zero ();
 
@@ -80,23 +80,19 @@ void print_linear_equation (const struct roots_square_equation *roots_square){
 
     assert(roots_square != nullptr);
 
-    static double epsilon = 1e-10;
-
     double x1 = roots_square->x1;
 
-    if (fabs(x1) < epsilon){//in fucntion
+    if (compare_double_with_zero(x1)){
 
         x1 = 0;
     }
 
-    printf("Уравнение линейное, его решение равно %g", x1);
+    printf("Уравнение линейное, его решение равно %g\n", x1);
 }
 
 void print_zero_discriminant (const struct roots_square_equation *roots_square){
 
     assert(roots_square != nullptr);
-
-
 
     double x1 = roots_square->x1;
 
@@ -105,17 +101,17 @@ void print_zero_discriminant (const struct roots_square_equation *roots_square){
         x1 = 0;
     }
 
-    printf("Дискриминант равен 0, решение единственно, оно равно %g", x1);
+    printf("Дискриминант равен 0, решение единственно, оно равно %g\n", x1);
 }
 
 void print_negative_discriminant (){
 
-    printf("Дискриминант меньше 0, корней нет");
+    printf("Дискриминант меньше 0, корней нет\n");
 }
 
 void print_linear_equation_zero (){
 
-    printf("У уравнения нет решений");
+    printf("У уравнения нет решений\n");
 }
 
 void print_positive_discriminant (const struct roots_square_equation *roots_square){
@@ -129,5 +125,5 @@ void print_positive_discriminant (const struct roots_square_equation *roots_squa
 
 void print_eof_in_stdio (){
 
-    printf("В консоли EOF, решение уравнения не будет");
+    printf("В консоли EOF, решение уравнения не будет\n");
 }

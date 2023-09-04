@@ -1,7 +1,8 @@
-#include "new_solving.h"
 #include <assert.h>
 #include <math.h>
 #include "func_tools.h"
+#include "new_solving.h"
+
 
 void solving_linear_equation (const struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square){
 
@@ -37,8 +38,9 @@ void solve_equation_with_zero_discriminant (const struct square_equation_coefs *
     }
 }
 
-void solve_equation_with_positive_discriminant (const struct square_equation_coefs *equation_coef, struct roots_square_equation *roots_square, double *discriminant){
-
+void solve_equation_with_positive_discriminant (const struct square_equation_coefs *equation_coef,
+                                                struct roots_square_equation       *roots_square,
+                                                double *discriminant){
     assert(equation_coef != nullptr);
     assert(roots_square  != nullptr);
     assert(discriminant  != nullptr);
@@ -83,7 +85,7 @@ Count_of_roots solving_equation (const struct square_equation_coefs *equation_co
 
     switch (type_of_input_equation){
 
-        case NOT_A_EQUATION:{//пробел
+        case NOT_A_EQUATION:{
 
             return INFINITE_NUMBER_OF_ROOTS;
         }
@@ -116,7 +118,6 @@ Count_of_roots solving_equation (const struct square_equation_coefs *equation_co
                 solve_equation_with_zero_discriminant (equation_coef, roots_square);
 
                 return ONE_ROOT;
-
             }
 
             if (positive_comparator_discriminant(discriminant)){
@@ -147,7 +148,6 @@ double Discriminant_calculation (const struct square_equation_coefs *equation_co
     return b*b-4*a*c;
 }
 
-
 bool positive_comparator_discriminant (double parametr){
 
     const double EPSILON = 1e-10;
@@ -159,3 +159,4 @@ bool positive_comparator_discriminant (double parametr){
 
     return false;
 }
+

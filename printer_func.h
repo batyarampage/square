@@ -32,9 +32,12 @@ void print_negative_discriminant ();
 ///Функция для вывода сообщения об отсутствии решений
 void print_linear_equation_zero ();
 
+
 ///Функция для вывода сообщения о решении квадратного уравнения с положительным дискриминантом
 void print_positive_discriminant (const struct roots_square_equation *roots_square);
 
+
+///Функция для вывода сообщения о том, что EOF в потоке ввода
 void print_eof_in_stdio ();
 
 #endif

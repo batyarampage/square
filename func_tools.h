@@ -1,3 +1,5 @@
+#ifndef func_tools
+#define func_tools
 #include <math.h>
 #include <stdio.h>
 
@@ -6,3 +8,5 @@ bool compare_double_with_zero (double param);
 
 ///Функция для очистки потока ввода-вывода
 void cleaner_stdio ();
+
+#endif

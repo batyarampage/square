@@ -5,6 +5,7 @@
 #include "struct_of_square_equation.h"
 
 
+
 ///Функция, которая решает линейное уравнение
 /*!
 Решает подслучай квадратного уравнения - линейное уравнение
@@ -50,11 +51,15 @@ Count_of_roots solving_equation (const struct square_equation_coefs *equation_co
 
 ///Функция для подсчета дискриминанта квадратного уравнения
 /*!
- \param equation_coef - указатель на структуру с коэффициентами квадратного уравнения
+ \param [in] equation_coef - указатель на структуру с коэффициентами квадратного уравнения
+ \param [out] Возвращается значение дискриминанта
 */
 double Discriminant_calculation (const struct square_equation_coefs *equation_coef);
 
 ///Функция для сравнения дискриминанта с нулем
+/*!
+ \param parametr - значение дискриминанта
+*/
 bool positive_comparator_discriminant (double parametr);
 
 #endif

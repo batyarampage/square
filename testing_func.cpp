@@ -4,7 +4,6 @@
 #include "new_solving.h"
 #include "test_coef.h"
 #include "testing_func.h"
-#include "const_def.h"
 #include "func_tools.h"
 
 static const char* RED = "\033[31m";
